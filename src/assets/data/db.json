@@ -1,0 +1,34 @@
+{
+    "produtos": [
+        {
+            "id": 1,
+            "nome": "Torta de banana",
+            "categoria": {
+                "id": 1,
+                "nome": "Tortas"
+            },
+            "pontosRecebido": 25,
+            "pontosRetirada": 0
+        },
+        {
+            "id": 2,
+            "nome": "Bolo de banana",
+            "categoria": {
+                "id": 2,
+                "nome": "Bolos"
+            },
+            "pontosRecebido": 30,
+            "pontosRetirada": 0
+        },
+        {
+            "id": 3,
+            "nome": "Pão de queijo com linguiça",
+            "categoria": {
+                "id": 3,
+                "nome": "Pão de Queijo"
+            },
+            "pontosRecebido": 20,
+            "pontosRetirada": 0
+        }
+    ]
+}
