@@ -9,13 +9,25 @@ import { Produto } from '../models/produto';
 })
 export class ProdutoService {
 
-  constructor(private httpClient: HttpClient) { }
-  url = 'http://localhost:3000/produtos';
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  constructor( private https: HttpClient ) {}
+
+  salvar(produto:Produto ) : Observable<Produto> {
+    return this.https.post<Produto>( `https://localhost:8080/fidelidade/produto` ,produto);
   }
 
-  getProduto(): Observable<Produto[]>{
-    return this.httpClient.get<Produto[]>(this.url)
+  atualizar(produto:Produto ) : Observable<any> {
+    return this.https.put<Produto>(`https://localhost:8080/fidelidade/produto/${produto.idProduto}` ,produto);
+  }
+
+  getClientes() : Observable<Produto[]> {
+    return this.https.get<Produto[]>(`https://localhost:8080/fidelidade/produtos`);
+  }
+  
+  getClienteById(id: number) : Observable<Produto> {
+    return this.https.get<any>(`https://localhost:8080/fidelidade/produto/${id}`);
+  }
+
+  deletar(produto:Produto) : Observable<any> {
+    return this.https.delete<any>(`https://localhost:8080/fidelidade/produto/${produto.idProduto}`);
   }
 }

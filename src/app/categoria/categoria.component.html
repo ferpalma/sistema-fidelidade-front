@@ -1,0 +1,59 @@
+<h1 class="mt-4">Categorias</h1>
+<div class="container">
+    <form #categoria="ngForm" (ngSubmit)="onSubmit()" >
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true">
+                    Cliente salvo/atualizado com sucesso!    
+                </div>
+                <div class="alert alert-danger" role="alert" *ngFor="let erro of errors">
+                    {{ erro  }}    
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="categoria.id">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>ID:</label>
+                    <input type="text" [ngModel]="categoria.id" name="id" class="form-control" disabled="true" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Nome: *</label>
+                    <input type="text" class="form-control" 
+                           [(ngModel)]="categoria.nome" name="nome"   />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Status: *</label>
+                    <input type="text" class="form-control" 
+                            [(ngModel)]="categoria.status" name="status"  />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <button type="submit" class="btn btn-success" *ngIf="!categoria.id">
+                    <i class="fa fa-save" ></i> Salvar
+                </button>
+
+                <button type="submit" class="btn btn-primary" *ngIf="categoria.id">
+                    <i class="fa fa-sync-alt" ></i> Atualizar
+                </button>
+
+                <button type="button" class="btn btn-danger ml-1"></button>
+                    <i class="fa fa-arrow-alt-circle-left" ></i> Voltar
+              
+            </div>
+     
+        </div>
+    </form>
+</div>
