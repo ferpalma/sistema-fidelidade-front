@@ -1,5 +1,9 @@
-<h1 class="mt-4">Categorias</h1>
+<app-header></app-header>
+
+
 <div class="container">
+    <h1 class="my-4">Categorias</h1>
+    <mat-card>
     <form #categoria="ngForm" (ngSubmit)="onSubmit()" >
 
         <div class="row">
@@ -23,14 +27,17 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label>Nome: *</label>
                     <input type="text" class="form-control" 
                            [(ngModel)]="categoria.nome" name="nome"   />
                 </div>
             </div>
-            <div class="col-md-6">
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="form-group">
                     <label>Status: *</label>
                     <input type="text" class="form-control" 
@@ -40,20 +47,23 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-success" *ngIf="!categoria.id">
-                    <i class="fa fa-save" ></i> Salvar
-                </button>
+            <div class="col d-flex justify-content-between">
+                
 
                 <button type="submit" class="btn btn-primary" *ngIf="categoria.id">
                     <i class="fa fa-sync-alt" ></i> Atualizar
                 </button>
 
-                <button type="button" class="btn btn-danger ml-1"></button>
+                <button type="button" class="btn btn-danger ml-1" >
                     <i class="fa fa-arrow-alt-circle-left" ></i> Voltar
-              
+                </button>
+
+                <button type="submit" class="btn btn-success" *ngIf="!categoria.id">
+                    <i class="fa fa-save" ></i> Salvar
+                </button>
             </div>
      
         </div>
     </form>
+    </mat-card>
 </div>
