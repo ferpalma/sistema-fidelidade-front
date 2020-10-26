@@ -12,10 +12,10 @@ const routes: Routes = [
     component: DashboardPageComponent
   },
   {
-    path: 'typography',
+    path: 'cliente',
     pathMatch: 'full',
     canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/typography/typography.module').then(m => m.TypographyModule)
+    loadChildren: () => import('./pages/cliente/cliente.module').then(m => m.ClienteModule)
   },
   {
     path: 'categoria',
