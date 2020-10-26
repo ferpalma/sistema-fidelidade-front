@@ -23,6 +23,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/categoria/categoria.module').then(m => m.CategoriaModule)
   },
+
+  {
+    path: 'produto',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
+  },
   {
     path: 'tables',
     pathMatch: 'full',
