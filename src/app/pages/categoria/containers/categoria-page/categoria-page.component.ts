@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Categoria } from '../categoria';
-import { CategoriaService } from '../../../../service/categoria.service'
 
 @Component({
   selector: 'app-categoria-page',

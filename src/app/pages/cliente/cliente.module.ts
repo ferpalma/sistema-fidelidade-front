@@ -14,6 +14,8 @@ import { ClientePageComponent } from './containers/cliente-page/cliente-page.com
 import { ListaClienteComponent } from './components/lista-cliente/lista-cliente.component';
 import { CadastroClienteComponent } from './components/cadastro-cliente/cadastro-cliente.component';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 @NgModule({
   declarations: [ClientePageComponent, ListaClienteComponent, CadastroClienteComponent],
   imports: [
@@ -25,7 +27,8 @@ import { CadastroClienteComponent } from './components/cadastro-cliente/cadastro
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    TextMaskModule
   ]
 })
 export class ClienteModule { }

@@ -10,6 +10,7 @@ export class CadastroClienteComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
