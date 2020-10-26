@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+
+import { CadastroCategoriaComponent } from '../cadastro-categoria/cadastro-categoria.component'
 
 @Component({
   selector: 'app-lista-categoria',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaCategoriaComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
   }
 
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(CadastroCategoriaComponent);
+  }
 }
+
+

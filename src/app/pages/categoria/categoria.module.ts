@@ -14,13 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 import { ListaCategoriaComponent } from './components/lista-categoria/lista-categoria.component';
 
 import {MatButtonModule} from '@angular/material/button';
+import { CadastroCategoriaComponent } from './components/cadastro-categoria/cadastro-categoria.component';
 
 
 // import { ComponentsComponent } from './components/components.component';
 
 
 @NgModule({
-  declarations: [CategoriaPageComponent, ListaCategoriaComponent],
+  declarations: [CategoriaPageComponent, ListaCategoriaComponent, CadastroCategoriaComponent],
   imports: [
     CommonModule,
     CategoriaRoutingModule,
