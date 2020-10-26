@@ -1,18 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
-import { ProdutoService } from './service/produto.service';
-import { CategoriaService } from './service/categoria.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 
-import { ProdutoModule } from './produto/produto.module';
-import { CategoriaModule } from './categoria/categoria.module';
-import { FormsModule } from '@angular/forms';
-import { CategoriaComponent } from './categoria/categoria.component';
-import { ProdutoComponent } from './produto/produto.component';
-import { HeaderComponent } from './header/header.component';
+import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AuthModule } from './pages/auth/auth.module';
+import { CategoriaPageComponent } from './pages/categoria/containers/categoria-page/categoria-page.component';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -25,9 +25,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import {MatButtonModule} from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatCardModule} from '@angular/material/card';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatStepperModule} from '@angular/material/stepper';
@@ -58,27 +56,23 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ClienteComponent } from './cliente/cliente.component'; 
-
-
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    CategoriaComponent,
-    ProdutoComponent,
-    HeaderComponent,
-    ClienteComponent
-    
+    NotFoundComponent
+    // CategoriaPageComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    ProdutoModule,
-    CategoriaModule,
+    SharedModule,
+    AuthModule,
+    DashboardModule,
+    BrowserAnimationsModule,
+    RouterModule,
     AppRoutingModule,
+    ToastrModule.forRoot(),
+    MatCardModule,
+    MatButtonModule,
     A11yModule,
     ClipboardModule,
     CdkStepperModule,
@@ -123,14 +117,8 @@ import { ClienteComponent } from './cliente/cliente.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    BrowserAnimationsModule
   ],
-  providers: [
-    ProdutoService,
-    CategoriaService
-  ],
-  bootstrap: [
-    AppComponent
-  ]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

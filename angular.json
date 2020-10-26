@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "primeiro-projeto": {
+    "angular-material-admin": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/primeiro-projeto",
+            "outputPath": "dist/angular-material-admin",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,11 +24,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "./node_modules/font-awesome/scss/font-awesome.scss",
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/custom-theme.scss"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -58,41 +58,36 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "hmr": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.hmr.ts"
+                }
+              ]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "primeiro-projeto:build"
+            "browserTarget": "angular-material-admin:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "primeiro-projeto:build:production"
+              "browserTarget": "angular-material-admin:build:production"
+            },
+            "hmr": {
+              "hmr": true,
+              "browserTarget": "angular-material-admin:build:hmr"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "primeiro-projeto:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+            "browserTarget": "angular-material-admin:build"
           }
         },
         "lint": {
@@ -107,24 +102,9 @@
               "**/node_modules/**"
             ]
           }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "primeiro-projeto:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "primeiro-projeto:serve:production"
-            }
-          }
         }
       }
     }
   },
-  "defaultProject": "primeiro-projeto",
-  "cli": {
-    "analytics": "6e3d3f1a-be6f-4914-bb49-7ac822ea9a9b"
-  }
+  "defaultProject": "angular-material-admin"
 }
