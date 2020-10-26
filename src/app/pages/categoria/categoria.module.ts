@@ -11,10 +11,16 @@ import { FormsModule }   from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ListaCategoriaComponent } from './components/lista-categoria/lista-categoria.component';
+
+import {MatButtonModule} from '@angular/material/button';
+
+
+// import { ComponentsComponent } from './components/components.component';
 
 
 @NgModule({
-  declarations: [CategoriaPageComponent],
+  declarations: [CategoriaPageComponent, ListaCategoriaComponent],
   imports: [
     CommonModule,
     CategoriaRoutingModule,
@@ -23,7 +29,8 @@ import { MatInputModule } from '@angular/material/input';
     MatInputModule,
     MatFormFieldModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule
   ]
 })
 export class CategoriaModule { }
