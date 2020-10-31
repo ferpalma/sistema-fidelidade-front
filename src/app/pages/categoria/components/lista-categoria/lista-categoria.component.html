@@ -8,13 +8,17 @@
     <table class="table table-hover table-borderless table-striped">
         <thead>
             <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">Status</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Bebida</td>
+            <tr *ngFor="let categoria of listaCategoria">
+                <td>{{categoria.id}}</td>
+                <td>{{categoria.nome}}</td>
+                <td>{{categoria.status}}</td>
                 <td class="text-right">
                     <!-- <button mat-raised-button style="background-color: aquamarine;">Basic</button>
                     <button mat-raised-button color="primary">Primary</button> -->
@@ -29,7 +33,7 @@
                 </td>
 
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>Comida</td>
                 <td class="text-right">
                     <button mat-raised-button color="accent" class="mr-3">
@@ -56,7 +60,7 @@
                         </span>Apagar</button>
                 </td>
 
-            </tr>
+            </tr> -->
         </tbody>
     </table>
 </mat-card>
