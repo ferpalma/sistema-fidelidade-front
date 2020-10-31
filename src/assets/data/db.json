@@ -1,0 +1,124 @@
+{
+    "categorias": [
+      {
+        "id": 1,
+        "nome": "Bebida",
+        "status": true
+      },
+      {
+        "id": 2,
+        "nome": "Comida",
+        "status": true
+      },
+      {
+        "id": 3,
+        "nome": "Sobremesa",
+        "status": true
+      }
+    ],
+    "clientes": [
+        {
+          "id": 1,
+          "nome": "Beatriz Angélica",
+          "cpf": "123.123.123-12",
+          "email": "bea@gmail.com",
+          "status": true,
+          "telefone": "1234-1244",
+          "pontos": 100
+        },
+        {
+          "id": 2,
+          "nome": "Francisco Vitor",
+          "cpf": "123.123.123-12",
+          "email": "vitu@gmail.com",
+          "status": true,
+          "telefone": "1234-1244",
+          "pontos": 100
+        },
+        {
+          "id": 3,
+          "nome": "Fernanda Maia",
+          "cpf": "123.123.123-12",
+          "email": "ferfa@gmail.com",
+          "status": true,
+          "telefone": "1234-1244",
+          "pontos": 100
+        }
+      ],
+      "funcionario": [
+        {
+          "id": 1,
+          "nome": "Beatriz Angélica",
+          "cpf": "123.123.123-12",
+          "email": "bea@gmail.com",
+          "status": true,
+          "senha": "senhaBastanteForte",
+          "permissao": {
+              "id": 1,
+              "descricao": "autorizacao para nao sei o que"
+          }
+        },
+        {
+          "id": 2,
+          "nome": "Francisco Vitor",
+          "cpf": "123.123.123-12",
+          "email": "vitu@gmail.com",
+          "status": true,
+          "senha": "senha123",
+          "permissao": {
+              "id": 1,
+              "descricao": "autorizacao para nao sei o que"
+          }
+        },
+        {
+          "id": 3,
+          "nome": "Fernanda Maia",
+          "cpf": "123.123.123-12",
+          "email": "ferfa@gmail.com",
+          "status": true,
+          "senha": "password123",
+          "permissao": {
+              "id": 1,
+              "descricao": "autorizacao para nao sei o que"
+          }
+        }
+      ],
+      "produto": [
+        {
+          "id": 1,
+          "nome": "coca cola",
+          "status": true,
+          "categoria": {
+            "id": 1,
+            "nome": "Bebida",
+            "status": true
+          },
+          "pontosRecebidos": 100,
+          "pontosRetirada": 100
+        },
+        {
+          "id": 2,
+          "nome": "fanta",
+          "status": true,
+          "categoria": {
+            "id": 1,
+            "nome": "Bebida",
+            "status": true
+          },
+          "pontosRecebidos": 100,
+          "pontosRetirada": 100
+        },
+        {
+          "id": 3,
+          "nome": "guaraná",
+          "status": true,
+          "categoria": {
+            "id": 1,
+            "nome": "Bebida",
+            "status": true
+          },
+          "pontosRecebidos": 100,
+          "pontosRetirada": 100
+        }
+      ]
+  }
