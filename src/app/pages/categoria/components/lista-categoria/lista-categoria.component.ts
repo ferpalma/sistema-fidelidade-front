@@ -42,6 +42,15 @@ export class ListaCategoriaComponent implements OnInit {
     });
   }
 
+  // copia o categoriaro para ser editado.
+  editCategoria(categoria: Categoria) {
+    this.categoria = { ...categoria };
+    this.dialog.open(CadastroCategoriaComponent, {
+      data:{
+        nome: this.categoria.nome
+      }
+    });
+  }
 
   // limpa o formulario
   cleanForm(form: NgForm) {

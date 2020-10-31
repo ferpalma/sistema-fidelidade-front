@@ -11,10 +11,6 @@
       "status": true
     },
     {
-      "nome": "teste",
-      "id": 4
-    },
-    {
       "nome": "teste 2",
       "id": 5
     },
@@ -25,6 +21,10 @@
     {
       "nome": "teste 4",
       "id": 7
+    },
+    {
+      "nome": "dasda",
+      "id": 8
     }
   ],
   "clientes": [

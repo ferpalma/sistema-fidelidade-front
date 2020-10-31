@@ -20,7 +20,7 @@ export class CadastroCategoriaComponent implements OnInit {
     this.getListaCategoria();
   }
 
-  // defini se um categoriaro será criado ou atualizado
+  // define se um categoriaro será criado ou atualizado
   saveCategoria(form: NgForm) {
     if (this.categoria.id !== undefined) {
       this.categoriaService.updateCategoria(this.categoria).subscribe(() => {
