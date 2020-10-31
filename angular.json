@@ -106,5 +106,8 @@
       }
     }
   },
-  "defaultProject": "angular-material-admin"
+  "defaultProject": "angular-material-admin",
+  "cli": {
+    "analytics": "703f1d27-f4ca-4d41-81b1-775784a46e20"
+  }
 }
