@@ -10,9 +10,9 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="status">Status</label>
-            <input type="checkbox" [(ngModel)]="categoria.status" id="status" name="status" #status="ngModel"  [checked]="categoria.status">
+        <div class="form-group form-check">
+            <input type="checkbox" [(ngModel)]="categoria.status" id="status" name="status" #status="ngModel"  [checked]="categoria.status" class="form-check-input">
+            <label class="form-check-label" for="status">Ativo</label>
         </div>
         
        
