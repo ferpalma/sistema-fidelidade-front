@@ -20,7 +20,7 @@ export class CategoriaService {
   }
 
   // Obtem todas as categorias
-  getCategorias(): Observable<Categoria[]> {
+  getListaCategoria(): Observable<Categoria[]> {
     return this.httpClient.get<Categoria[]>(this.url)
       .pipe(
         retry(2),
@@ -37,7 +37,7 @@ export class CategoriaService {
   }
 
   // salva uma categoria
-  saveCar(categoria: Categoria): Observable<Categoria> {
+  saveCategoria(categoria: Categoria): Observable<Categoria> {
     return this.httpClient.post<Categoria>(this.url, JSON.stringify(categoria), this.httpOptions)
       .pipe(
         retry(2),
@@ -46,7 +46,7 @@ export class CategoriaService {
   }
 
   // utualiza um carro
-  updateCar(categoria: Categoria): Observable<Categoria> {
+  updateCategoria(categoria: Categoria): Observable<Categoria> {
     return this.httpClient.put<Categoria>(this.url + '/' + categoria.id, JSON.stringify(categoria), this.httpOptions)
       .pipe(
         retry(1),
@@ -55,7 +55,7 @@ export class CategoriaService {
   }
 
   // deleta uma categoria
-  deleteCar(categoria: Categoria) {
+  deleteCategoria(categoria: Categoria) {
     return this.httpClient.delete<Categoria>(this.url + '/' + categoria.id, this.httpOptions)
       .pipe(
         retry(1),
