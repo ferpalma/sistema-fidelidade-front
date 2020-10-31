@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { CategoriaService } from '../../services/categoria.service';
 import { Categoria } from '../../models/categoria';
@@ -11,14 +12,19 @@ import { NgForm } from '@angular/forms';
 })
 export class CadastroCategoriaComponent implements OnInit {
 
-  categoria = {} as Categoria;
+  //categoria = {} as Categoria;
   listaCategoria: Categoria[];
 
-  constructor(private categoriaService: CategoriaService) {}
+  constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public categoria: Categoria) {}
   
   ngOnInit() {
     this.getListaCategoria();
   }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 
   // define se um categoriaro será criado ou atualizado
   saveCategoria(form: NgForm) {

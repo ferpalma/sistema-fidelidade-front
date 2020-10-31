@@ -16,8 +16,8 @@
         </thead>
         <tbody>
             <tr *ngFor="let categoria of listaCategoria">
-                <td>{{categoria.id}}</td>
-                <td>{{categoria.nome}}</td>
+                <td >{{categoria.id}}</td>
+                <td *ngIf="categoria.nome">{{categoria.nome}}</td>
                 <td>{{categoria.status}}</td>
                 <td class="text-right">
                     <!-- <button mat-raised-button style="background-color: aquamarine;">Basic</button>

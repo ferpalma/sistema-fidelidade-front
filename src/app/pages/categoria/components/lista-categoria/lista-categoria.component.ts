@@ -16,12 +16,14 @@ export class ListaCategoriaComponent implements OnInit {
 
   categoria = {} as Categoria;
   listaCategoria: Categoria[];
-  
+
   ngOnInit(): void {
     this.getListaCategoria();
   }
 
   constructor(public dialog: MatDialog, private categoriaService: CategoriaService) {}
+
+
 
   openDialog() {
     this.dialog.open(CadastroCategoriaComponent);
@@ -43,12 +45,20 @@ export class ListaCategoriaComponent implements OnInit {
   }
 
   // copia o categoriaro para ser editado.
-  editCategoria(categoria: Categoria) {
+  // editCategoria(categoria: Categoria) {
+  //   this.categoria = { ...categoria };
+  //   this.dialog.open(CadastroCategoriaComponent, {
+  //     data:{
+  //       nome: this.categoria.nome
+  //     }
+  //   });
+  // }
+
+  editCategoria(categoria: Categoria): void {
     this.categoria = { ...categoria };
-    this.dialog.open(CadastroCategoriaComponent, {
-      data:{
-        nome: this.categoria.nome
-      }
+    const dialogRef = this.dialog.open(CadastroCategoriaComponent, {
+      width: '450px',
+      data: {id: this.categoria.id, nome: this.categoria.nome}
     });
   }
 

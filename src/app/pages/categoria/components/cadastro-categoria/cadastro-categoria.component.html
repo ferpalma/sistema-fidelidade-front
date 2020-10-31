@@ -1,11 +1,12 @@
 <h3 mat-dialog-title class="mb-4">Cadastro de categoria</h3>
 <div mat-dialog-content>
     <form id="add-form" (ngSubmit)="f.form.valid && saveCategoria(f)" #f="ngForm" novalidate>
+
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" [(ngModel)]="categoria.nome" id="nome" name="nome" #model="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && model.invalid }" placeholder="Digite o nome">
-            <div *ngIf="f.submitted && model.invalid" class="invalid-feedback">
-                <div *ngIf="model.errors.required">Nome é obrigatório</div>
+            <input matInput type="text" [(ngModel)]="categoria.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+            <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                <div *ngIf="nome.errors.required">Nome é obrigatório</div>
             </div>
         </div>
         
@@ -13,13 +14,9 @@
         <div class="d-flex justify-content-between">
 
             <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="cleanForm(f)">
-                <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-                    clear
-                </span>Limpar</button>
+                Limpar</button>
             <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;"> 
-                <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-                    add
-                </span>Salvar</button>
+                Salvar</button>
         </div>
       </form>
 </div>
