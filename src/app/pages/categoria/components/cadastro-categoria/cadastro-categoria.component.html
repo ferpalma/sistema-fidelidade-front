@@ -9,6 +9,11 @@
                 <div *ngIf="nome.errors.required">Nome é obrigatório</div>
             </div>
         </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <input type="checkbox" [(ngModel)]="categoria.status" id="status" name="status" #status="ngModel" required class="form-control" [checked]="categoria.status">
+        </div>
         
        
         <div class="d-flex justify-content-between">
