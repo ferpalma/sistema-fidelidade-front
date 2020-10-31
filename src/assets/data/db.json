@@ -9,6 +9,22 @@
       "id": 3,
       "nome": "Sobremesa",
       "status": true
+    },
+    {
+      "nome": "teste",
+      "id": 4
+    },
+    {
+      "nome": "teste 2",
+      "id": 5
+    },
+    {
+      "nome": "teste 3",
+      "id": 6
+    },
+    {
+      "nome": "teste 4",
+      "id": 7
     }
   ],
   "clientes": [
