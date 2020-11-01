@@ -3,7 +3,7 @@
 O sistema irá funcionar com uma proposta de recompensa através de reembolso, onde uma porcentagem do valor do produto irá voltar para o cliente em forma de pontos, e esses pontos poderão ser trocados por qualquer produto que estiver disponível no site.
 
 ## Features
-Foi usado o template grátis * [Angular Material Admin Lite (v 1.0.2)](https://github.com/flatlogic/angular-material-admin)
+Foi usado o template grátis [Angular Material Admin Lite (v 1.0.2)](https://github.com/flatlogic/angular-material-admin)
 
 * Angular Material & SCSS
 * Responsive layout
