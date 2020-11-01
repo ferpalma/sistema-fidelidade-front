@@ -1,9 +1,22 @@
 import { Component, OnInit, Inject} from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { FuncionarioService } from '../../services/funcionario.service';
 import { Funcionario } from '../../models/funcionario';
 import { NgForm } from '@angular/forms';
+
+import { SuccessToastComponent } from '../success-toast/success-toast.component';
+
+enum ToastPositionTypes {
+  bottomCenter = 'toast-bottom-center',
+  bottomRight = 'toast-bottom-right',
+  bottomLeft = 'toast-bottom-left',
+  topCenter = 'toast-top-center',
+  topRight = 'toast-top-right',
+  topLeft = 'toast-top-left'
+}
+
 
 @Component({
   selector: 'app-cadastro-funcionario',
@@ -12,10 +25,15 @@ import { NgForm } from '@angular/forms';
 })
 export class CadastroFuncionarioComponent implements OnInit {
 
+  public toastrPositionTypes: typeof ToastPositionTypes = ToastPositionTypes;
+  public toastrPosition: string = this.toastrPositionTypes.topRight;
+  public timeOut = 3000;
+  public toastrLink: string = 'https://github.com/scttcper/ngx-toastr';
+
   funcionario = {} as Funcionario;
   listaFuncionario: Funcionario[];
 
-  constructor(private funcionarioService: FuncionarioService, public dialogRef: MatDialogRef<CadastroFuncionarioComponent>, @Inject(MAT_DIALOG_DATA) public data: Funcionario) {}
+  constructor(private funcionarioService: FuncionarioService, public dialogRef: MatDialogRef<CadastroFuncionarioComponent>, @Inject(MAT_DIALOG_DATA) public data: Funcionario, private toastrService: ToastrService) {}
   
   ngOnInit() {
     this.getListaFuncionario();
@@ -29,6 +47,7 @@ export class CadastroFuncionarioComponent implements OnInit {
   saveFuncionario(form: NgForm) {
     this.funcionarioService.saveFuncionario(this.funcionario).subscribe(() => {
       this.cleanForm(form);
+      this.showSuccess();
     });
   }
 
@@ -44,6 +63,19 @@ export class CadastroFuncionarioComponent implements OnInit {
     this.getListaFuncionario();
     form.resetForm();
     this.funcionario = {} as Funcionario;
+  }
+
+  public showSuccess(): void {
+    this.toastrService.show(
+      null,
+      null,
+      {
+        positionClass: this.toastrPosition,
+        toastComponent: SuccessToastComponent,
+        timeOut: this.timeOut,
+        tapToDismiss: false
+      }
+    );
   }
 
 }
