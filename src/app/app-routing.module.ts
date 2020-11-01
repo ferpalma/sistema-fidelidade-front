@@ -12,6 +12,12 @@ const routes: Routes = [
     component: DashboardPageComponent
   },
   {
+    path: 'funcionario',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/funcionario/funcionario.module').then(m => m.FuncionarioModule)
+  },
+  {
     path: 'cliente',
     pathMatch: 'full',
     canActivate: [AuthGuard],

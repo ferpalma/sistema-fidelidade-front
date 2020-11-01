@@ -3,6 +3,7 @@ export enum routes {
   TYPOGRAPHY = '/typography',
   CATEGORIA = '/categoria',
   CLIENTE = '/cliente',
+  FUNCIONARIO = '/funcionario',
   PRODUTO = '/produto',
   TABLES = '/tables',
   NOTIFICATION = '/notification',
