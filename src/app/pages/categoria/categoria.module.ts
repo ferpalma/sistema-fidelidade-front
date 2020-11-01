@@ -15,10 +15,11 @@ import { ListaCategoriaComponent } from './components/lista-categoria/lista-cate
 
 import {MatButtonModule} from '@angular/material/button';
 import { CadastroCategoriaComponent } from './components/cadastro-categoria/cadastro-categoria.component';
+import { EditarCategoriaComponent } from './components/editar-categoria/editar-categoria.component';
 
 
 @NgModule({
-  declarations: [CategoriaPageComponent, ListaCategoriaComponent, CadastroCategoriaComponent],
+  declarations: [CategoriaPageComponent, ListaCategoriaComponent, CadastroCategoriaComponent, EditarCategoriaComponent],
   imports: [
     CommonModule,
     CategoriaRoutingModule,

@@ -11,43 +11,19 @@
       "status": true
     },
     {
+      "nome": "Salgado",
+      "status": true,
+      "id": 4
+    },
+    {
       "id": 5,
-      "nome": "teste 2",
-      "status": true
+      "nome": "Doce",
+      "status": false
     },
     {
       "id": 6,
-      "nome": "teste 3",
+      "nome": "Salgado e Doce",
       "status": true
-    },
-    {
-      "id": 7,
-      "nome": "teste 3"
-    },
-    {
-      "id": 9,
-      "nome": "saguadin",
-      "status": true
-    },
-    {
-      "id": 11,
-      "nome": "aaaaaaaaa"
-    },
-    {
-      "id": 17,
-      "nome": "aaaaa"
-    },
-    {
-      "nome": "3",
-      "id": 18
-    },
-    {
-      "nome": "33333",
-      "id": 19
-    },
-    {
-      "nome": "mudei",
-      "id": 20
     }
   ],
   "clientes": [

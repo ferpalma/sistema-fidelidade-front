@@ -6,16 +6,16 @@ import { Categoria } from '../../models/categoria';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-cadastro-categoria',
-  templateUrl: './cadastro-categoria.component.html',
-  styleUrls: ['./cadastro-categoria.component.css']
+  selector: 'app-editar-categoria',
+  templateUrl: './editar-categoria.component.html',
+  styleUrls: ['./editar-categoria.component.css']
 })
-export class CadastroCategoriaComponent implements OnInit {
+export class EditarCategoriaComponent implements OnInit {
 
-  categoria = {} as Categoria;
+  // categoria = {} as Categoria;
   listaCategoria: Categoria[];
 
-  constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public data: Categoria) {}
+  constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<EditarCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public categoria: Categoria) {}
   
   ngOnInit() {
     this.getListaCategoria();
@@ -25,9 +25,10 @@ export class CadastroCategoriaComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // define se uma categoria será criada ou atualizada
+
+  // define se uma categoria será atualizada
   saveCategoria(form: NgForm) {
-    this.categoriaService.saveCategoria(this.categoria).subscribe(() => {
+    this.categoriaService.updateCategoria(this.categoria).subscribe(() => {
       this.cleanForm(form);
     });
   }

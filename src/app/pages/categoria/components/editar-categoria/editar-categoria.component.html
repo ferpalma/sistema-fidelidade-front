@@ -1,17 +1,18 @@
-<h3 mat-dialog-title class="mb-4">Cadastro de categoria</h3>
+<h3 mat-dialog-title class="mb-4">Editar categoria</h3>
 <div mat-dialog-content>
     <form id="add-form" (ngSubmit)="f.form.valid && saveCategoria(f)" #f="ngForm" novalidate>
 
         <div class="form-group">
             <label for="nome">Nome</label>
             <input type="text" [(ngModel)]="categoria.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+            <!-- <input type="text" ng-model="categoria.nome" ng-change="data.nome"/>  -->
             <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
                 <div *ngIf="nome.errors.required">Nome é obrigatório</div>
             </div>
         </div>
 
         <div class="form-group form-check">
-            <input type="checkbox" [(ngModel)]="categoria.status" id="status" name="status" #status="ngModel" class="form-check-input" checked>
+            <input type="checkbox" [(ngModel)]="categoria.status" id="status" name="status" #status="ngModel"  [checked]="categoria.status" class="form-check-input">
             <label class="form-check-label" for="status">Ativo</label>
         </div>
         
@@ -21,7 +22,7 @@
             <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="cleanForm(f)">
                 Limpar</button>
             <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;"> 
-                Salvar</button>
+                Alterar</button>
         </div>
       </form>
 </div>

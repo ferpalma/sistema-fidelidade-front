@@ -6,6 +6,7 @@ import { Categoria } from '../../models/categoria';
 import { NgForm } from '@angular/forms';
 
 import { CadastroCategoriaComponent } from '../cadastro-categoria/cadastro-categoria.component'
+import { EditarCategoriaComponent } from '../editar-categoria/editar-categoria.component'
 
 @Component({
   selector: 'app-lista-categoria',
@@ -26,7 +27,9 @@ export class ListaCategoriaComponent implements OnInit {
 
 
   openDialog() {
-    this.dialog.open(CadastroCategoriaComponent);
+    this.dialog.open(CadastroCategoriaComponent, {
+      width: '450px'
+    });
   }
 
 
@@ -56,7 +59,7 @@ export class ListaCategoriaComponent implements OnInit {
 
   editCategoria(categoria: Categoria): void {
     this.categoria = { ...categoria };
-    const dialogRef = this.dialog.open(CadastroCategoriaComponent, {
+    const dialogRef = this.dialog.open(EditarCategoriaComponent, {
       width: '450px',
       data: {id: this.categoria.id, nome: this.categoria.nome, status: this.categoria.status}
     });
