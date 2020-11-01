@@ -4,7 +4,7 @@
 
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input matInput type="text" [(ngModel)]="categoria.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+            <input type="text" [(ngModel)]="categoria.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
             <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
                 <div *ngIf="nome.errors.required">Nome é obrigatório</div>
             </div>

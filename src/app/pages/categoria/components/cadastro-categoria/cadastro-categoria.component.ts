@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CadastroCategoriaComponent implements OnInit {
 
-  //categoria = {} as Categoria;
+  //categoria_obj = {} as Categoria;
   listaCategoria: Categoria[];
 
   constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public categoria: Categoria) {}
@@ -26,7 +26,7 @@ export class CadastroCategoriaComponent implements OnInit {
   }
 
 
-  // define se um categoriaro será criado ou atualizado
+  // define se uma categoria será criada ou atualizada
   saveCategoria(form: NgForm) {
     if (this.categoria.id !== undefined) {
       this.categoriaService.updateCategoria(this.categoria).subscribe(() => {
@@ -39,21 +39,21 @@ export class CadastroCategoriaComponent implements OnInit {
     }
   }
 
-  // Chama o serviço para obtém todos os categoriaros
+  // Chama o serviço para obter todas as categorias
   getListaCategoria() {
     this.categoriaService.getListaCategoria().subscribe((listaCategoria: Categoria[]) => {
       this.listaCategoria = listaCategoria;
     });
   }
 
-  // deleta um categoriaro
+  // deleta uma categoria
   deleteCategoria(categoria: Categoria) {
     this.categoriaService.deleteCategoria(categoria).subscribe(() => {
       this.getListaCategoria();
     });
   }
 
-  // copia o categoriaro para ser editado.
+  // copia a categoria para ser editada
   editCategoria(categoria: Categoria) {
     this.categoria = { ...categoria };
   }

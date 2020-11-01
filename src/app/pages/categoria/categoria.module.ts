@@ -17,9 +17,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { CadastroCategoriaComponent } from './components/cadastro-categoria/cadastro-categoria.component';
 
 
-// import { ComponentsComponent } from './components/components.component';
-
-
 @NgModule({
   declarations: [CategoriaPageComponent, ListaCategoriaComponent, CadastroCategoriaComponent],
   imports: [
