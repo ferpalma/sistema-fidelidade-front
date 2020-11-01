@@ -16,6 +16,7 @@
             </tr>
         </thead>
         <tbody>
+            <!-- TODO: quem sabe adicionar um paginator -->
             <tr *ngFor="let categoria of listaCategoria">
                 <td >{{categoria.id}}</td>
                 <td *ngIf="categoria.nome">{{categoria.nome}}</td>
@@ -34,34 +35,6 @@
                 </td>
 
             </tr>
-            <!-- <tr>
-                <td>Comida</td>
-                <td class="text-right">
-                    <button mat-raised-button color="accent" class="mr-3">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-                        edit
-                        </span>Editar</button>
-                    <button mat-raised-button style="background-color: #e63946; color: white;">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-                        delete
-                        </span>Apagar</button>
-                </td>
-
-            </tr>
-            <tr>
-                <td>Janta</td>
-                <td class="text-right">
-                    <button mat-raised-button color="accent" class="mr-3">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-                        edit
-                        </span>Editar</button>
-                    <button mat-raised-button style="background-color: #e63946; color: white;">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-                        delete
-                        </span>Apagar</button>
-                </td>
-
-            </tr> -->
         </tbody>
     </table>
 </mat-card>
