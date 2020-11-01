@@ -45,7 +45,7 @@ export class CategoriaService {
       )
   }
 
-  // utualiza um carro
+  // atualiza uma categoria
   updateCategoria(categoria: Categoria): Observable<Categoria> {
     return this.httpClient.put<Categoria>(this.url + '/' + categoria.id, JSON.stringify(categoria), this.httpOptions)
       .pipe(

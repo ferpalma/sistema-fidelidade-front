@@ -91,6 +91,13 @@
         "id": 1,
         "descricao": "autorizacao para nao sei o que"
       }
+    },
+    {
+      "senha": "1234",
+      "nome": "Zhydani Benigno",
+      "email": "zhydani@gmail.com",
+      "cpf": "790.439.411-15",
+      "id": 4
     }
   ],
   "produto": [

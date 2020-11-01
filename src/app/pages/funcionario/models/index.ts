@@ -1,1 +1,1 @@
-export * from './categoria';
+export * from './funcionario';

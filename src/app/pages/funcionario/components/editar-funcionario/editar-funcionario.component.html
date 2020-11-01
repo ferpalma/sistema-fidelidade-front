@@ -1,1 +1,76 @@
-<p>editar-funcionario works!</p>
+<h3 mat-dialog-title class="mb-4">Editar funcionario</h3>
+<div mat-dialog-content>
+    <form id="add-form" (ngSubmit)="f.form.valid && saveFuncionario(f)" #f="ngForm" novalidate>
+
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" [(ngModel)]="funcionario.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+                    <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                        <div *ngIf="nome.errors.required">Nome é obrigatório</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" [(ngModel)]="funcionario.cpf" id="cpf" name="cpf" #cpf="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="000.000.000-00">
+                    <div *ngIf="f.submitted && cpf.invalid" class="invalid-feedback">
+                        <div *ngIf="cpf.errors.required">CPF é obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" [(ngModel)]="funcionario.email" id="email" name="email" #email="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="exemplo@email.com">
+                    <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                        <div *ngIf="email.errors.required">E-mail é obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" [(ngModel)]="funcionario.senha" id="senha" name="senha" #senha="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite a senha">
+                    <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+                        <div *ngIf="senha.errors.required">Senha é obrigatória</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="senha">Confirmar senha</label>
+                    <input type="password" id="senha" name="senha" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite a senha novamente">
+                    <div *ngIf="f.submitted && senha.invalid" class="invalid-feedback">
+                        <div *ngIf="senha.errors.required">Senha é obrigatória</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group form-check">
+            <input type="checkbox" [(ngModel)]="funcionario.status" id="status" name="status" #status="ngModel" class="form-check-input" checked>
+            <label class="form-check-label" for="status">Ativo</label>
+        </div>
+
+
+        <div class="d-flex justify-content-between">
+
+            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="cleanForm(f)">
+                Limpar</button>
+            <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;"> 
+                Alterar</button>
+        </div>
+    </form>
+</div>

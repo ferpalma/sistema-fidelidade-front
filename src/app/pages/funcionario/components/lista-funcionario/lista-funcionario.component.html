@@ -4,7 +4,7 @@
         <p>Categorias</p>
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
             add
-            </span>Adicionar categoria</button>
+            </span>Adicionar funcionario</button>
     </mat-card-title>
     <table class="table table-hover table-borderless table-striped">
         <thead>
@@ -12,23 +12,27 @@
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Status</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Email</th>
+                <th scope="col">Senha</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
             <!-- TODO: quem sabe adicionar um paginator -->
-            <tr *ngFor="let categoria of listaCategoria">
-                <td >{{categoria.id}}</td>
-                <td *ngIf="categoria.nome">{{categoria.nome}}</td>
-                <td>{{categoria.status ? 'Ativo':'Inativo'}}</td>
+            <tr *ngFor="let funcionario of listaFuncionario">
+                <td>{{funcionario.id}}</td>
+                <td *ngIf="funcionario.nome">{{funcionario.nome}}</td>
+                <td>{{funcionario.status ? 'Ativo':'Inativo'}}</td>
+                <td>{{funcionario.cpf}}</td>
+                <td>{{funcionario.email}}</td>
+                <td>{{funcionario.senha}}</td>
                 <td class="text-right">
-                    <!-- <button mat-raised-button style="background-color: aquamarine;">Basic</button>
-                    <button mat-raised-button color="primary">Primary</button> -->
-                    <button mat-raised-button color="accent" class="mr-3" (click)="editCategoria(categoria)">
+                    <button mat-raised-button color="accent" class="mr-3" (click)="editFuncionario(funcionario)">
                         <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
                         edit
                         </span>Editar</button>
-                    <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deleteCategoria(categoria)"> 
+                    <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deleteFuncionario(funcionario)"> 
                         <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
                         delete
                         </span>Apagar</button>
