@@ -12,10 +12,10 @@ import { NgForm } from '@angular/forms';
 })
 export class CadastroCategoriaComponent implements OnInit {
 
-  //categoria_obj = {} as Categoria;
+  categoria = {} as Categoria;
   listaCategoria: Categoria[];
 
-  constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public categoria: Categoria) {}
+  constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public data: Categoria) {}
   
   ngOnInit() {
     this.getListaCategoria();
@@ -29,13 +29,14 @@ export class CadastroCategoriaComponent implements OnInit {
   // define se uma categoria será criada ou atualizada
   saveCategoria(form: NgForm) {
     if (this.categoria.id !== undefined) {
-      this.categoriaService.updateCategoria(this.categoria).subscribe(() => {
+      this.categoriaService.updateCategoria(this.data).subscribe(() => {
         this.cleanForm(form);
       });
     } else {
       this.categoriaService.saveCategoria(this.categoria).subscribe(() => {
         this.cleanForm(form);
       });
+      
     }
   }
 
