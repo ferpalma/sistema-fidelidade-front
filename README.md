@@ -1,15 +1,10 @@
-# Angular Material Admin Lite (v 1.0.2) - free and open source angular admin dashboard template
-Including responsive layout and high quality UI built with Angular Material.
+# UFidelidade - Sistema de Troca de Pontos de fidelidade 
 
-[Demo](https://flatlogic.com/templates/angular-material-admin/demo) | [Download](https://github.com/flatlogic/angular-material-admin/archive/master.zip) | [Available versions](https://demo.flatlogic.com/angular-material-admin/) | [More templates](https://flatlogic.com/admin-dashboards)
-
-![1 (1)](https://user-images.githubusercontent.com/17360676/84912599-41a99c00-b0c2-11ea-8d9b-6c05a398b8ca.jpg)
-
-This repository contains a limited free version.
+O sistema irá funcionar com uma proposta de recompensa através de reembolso, onde uma porcentagem do valor do produto irá voltar para o cliente em forma de pontos, e esses pontos poderão ser trocados por qualquer produto que estiver disponível no site.
 
 ## Features
+Foi usado o template grátis * [Angular Material Admin Lite (v 1.0.2)](https://github.com/flatlogic/angular-material-admin)
 
-Using this template you will be able to leverage lots of built-in components and thus focus on building features that set you apart from competitors rather than bulding everything from scratch. Lite version of Angular Material Admin includes following features and pages:
 * Angular Material & SCSS
 * Responsive layout
 * Styled Angular Material components like buttons, cards, etc
@@ -24,53 +19,28 @@ Using this template you will be able to leverage lots of built-in components and
 * Login
 * 404
 
-![2 (1)](https://user-images.githubusercontent.com/17360676/84912752-6b62c300-b0c2-11ea-9ff0-f92bad33f2b0.jpg)
-
-Building a project from scratch means that there is a lot of things to keep track of all at once: analytics, dynamic forms data, UI and UX elements, and much more. This simple admin template is well suited for web apps or any other website or project that requires admin dashboard. This template will serve as a solid foundation for your upcoming project and will save you a lot of time and, hence, money.
+Além disso, também utilizamos o Bootstrap, angular material e material icons design.
 
 ## Quick Start
 
 #### 1. Get the latest version
 
-You can start by cloning the latest version of Angular Material Admin on your local machine by running:
+Você pode iniciar clonando este projeto em sua máquina:
 
 ```shell
-$ git clone -o angular-material-admin -b master --single-branch \
-      https://github.com/flatlogic/angular-material-admin.git MyApp
-$ cd MyApp
+$ git clone https://github.com/ferpalma/sistema-fidelidade-front.git
+$ cd sistema-fidelidade-front
 ```
 
 #### 2. Run `npm install`
 
-This will install both run-time project dependencies and developer tools listed
-in [package.json](../package.json) file.
+Isso fará com que instale as dependencias do projeto do [package.json](../package.json) file. Criando o arquivo node_modules. É importante que tenha instalado o node.js em sua máquina.
 
-#### 3. Run `npm start`
+#### 3. Run `npm start` ou `ng serve`
 
-This command will build the app from the source files. Then open `localhost:4200` in your browser.
-
-Now you can open your web app in a browser, on mobile devices and start
-hacking. The page must be served from a web server, e.g. apache, nginx, WebStorm built-in web server, etc., otherwise some features may not work properly.
+Esse comando irá dar build no projeto e então irá abrir `localhost:4200` em seu browser.
 
 ## Integration
-![3 (1)](https://user-images.githubusercontent.com/17360676/84912873-8b928200-b0c2-11ea-9e72-5aac8e8f339e.jpg)
+Foi feito um post no medium explicando como integramos nossas páginas
+https://zhydani.medium.com/utilizando-o-template-27e1dfda3692
 
-Angular Material Admin is a part of admin dashboard solution provided by Flatlogic. We can integrate admin dashboards with such systems as your accounting software, customer relationship management (CRM) system, email management, marketing automation, website analytics program, etc.  Customized Angular Material Admin can be a great way to learn about your products usability and extendability. With this dashboard, the owner of the website (platform) can easily track orders and their success rate, track social metrics such as the most popular referring social media sites and their appropriate URLs, monitor sales states and periods of growth to better understand what makes users tick. [Contact us](https://flatlogic.com/contact) to learn more.
-
-## Support
-For any additional information please refer to [Flatlogic homepage](https://flatlogic.com).
-
-## How can I support developers?
-- Star our GitHub repo :star:
-- [Tweet about it](https://twitter.com/intent/tweet?text=Amazing%20dashboard%20built%20with%20NodeJS,%20React%20and%20Bootstrap!&url=https://github.com/flatlogic/sing-app&via=flatlogic).
-- Create pull requests, submit bugs, suggest new features or documentation updates :wrench:
-- Follow [@flatlogic on Twitter](https://twitter.com/flatlogic).
-- Subscribe to Flatlogic newsletter at [flatlogic.com](https://flatlogic.com/)
-- Like our page on [Facebook](https://www.facebook.com/flatlogic/) :thumbsup:
-
-## More from Flatlogic
-- [Awesome Bootstrap Checkboxes & Radios](https://github.com/flatlogic/awesome-bootstrap-checkbox) - ✔️Pure css way to make inputs look prettier
-- [React Native Starter](https://github.com/flatlogic/react-native-starter) - 🚀 A powerful react native starter template that bootstraps development of your mobile application
-
-## Premium themes
-Looking for premium themes and templates? Check out our other templates at [flatlogic.com](https://flatlogic.com/templates).
