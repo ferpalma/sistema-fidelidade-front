@@ -1,22 +1,35 @@
 <h3 mat-dialog-title class="mb-4">Cadastro de produto</h3>
 <div mat-dialog-content>
-    <form>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Nome</label>
-                <input type="name" class="form-control">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputState">Produto</label>
+    <form id="add-form" (ngSubmit)="f.form.valid && saveProduto(f)" #f="ngForm" novalidate>
 
-                <select ng-model="produto.categoria.idCategoria" data-ng-options="produto.categoria.idCategoria as produto.categoria.nome for produto.categoria in "></select>
-            </div>
-        </div>
         <div class="form-group">
-            <img [src]="url" height="200"> <br/>
-            <input type='file' (change)="onSelectFile($event)">
+            <label for="nome">Nome</label>
+            <input type="text" [(ngModel)]="produto.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+            <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                <div *ngIf="nome.errors.required">Nome é obrigatório</div>
+            </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
+        <div class="form-group form-check">
+            <select [ngModel]="categoria" (ngModelChange)="onSelectName($event)" class="form-control">
+
+                <option value=""></option>
+
+                <option *ngFor="let categoria of listaCategoria" 
+                        [ngValue]="{ id: categoria.idCategoria, name: categoria.nome }">  
+                    {{categoria.nome}}
+                </option>
+            </select>
+            <br />
+        </div>
+
+
+        <div class="d-flex justify-content-between">
+
+            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="cleanForm(f)">
+                Limpar</button>
+            <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;">
+                Salvar</button>
+        </div>
     </form>
 </div>

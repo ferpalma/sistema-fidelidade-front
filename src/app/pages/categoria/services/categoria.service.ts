@@ -9,7 +9,8 @@ import { Categoria } from '../models/categoria';
 })
 export class CategoriaService {
 
-  url = 'http://localhost:8080/fidelidade'; // api rest fake
+  url = 'http://localhost:8080/fidelidade'; 
+  // url = 'http://localhost:3000'; 
 
   // injetando o HttpClient
   constructor(private httpClient: HttpClient) { }

@@ -1,5 +1,5 @@
 import { Categoria } from './../../../categoria/models/categoria';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { ProdutoService } from '../../services/produto.service';
@@ -21,7 +21,7 @@ export class CadastroProdutoComponent implements OnInit {
   produto = {} as Produto;
   listaProduto: Produto[];
 
-  constructor(private produtoService: ProdutoService, categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroProdutoComponent>, @Inject(MAT_DIALOG_DATA) public data: Produto) {}
+  constructor(private produtoService: ProdutoService, private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroProdutoComponent>, @Inject(MAT_DIALOG_DATA) public data: Produto) {}
 
   ngOnInit() {
     this.getListaProduto();
@@ -58,5 +58,13 @@ export class CadastroProdutoComponent implements OnInit {
     form.resetForm();
     this.produto = {} as Produto;
   }
+
+  onSelectName({id, nome}): void {
+    // this.selectedName = name;         // Not Recommended; With this, you can now reset the selectedName value to just the name value
+ 
+    this.categoria.nome = nome;                 // Create new variable to store the name, if you will reassign the selectedName model value which holds ID and Name based on the template [ngValue], it will not reflect the updated data if you reassign it to just name. I suggest you create new one that acts as your official model name to store the selected name. 
+ 
+    console.log(id);                  // and fetch its ID as well, depends on how you want to use this.
+ }
 }
 
