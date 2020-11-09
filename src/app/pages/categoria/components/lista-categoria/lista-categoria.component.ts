@@ -61,7 +61,7 @@ export class ListaCategoriaComponent implements OnInit {
     this.categoria = { ...categoria };
     const dialogRef = this.dialog.open(EditarCategoriaComponent, {
       width: '450px',
-      data: {id: this.categoria.id, nome: this.categoria.nome, status: this.categoria.status}
+      data: {idCategoria: this.categoria.idCategoria, nome: this.categoria.nome, status: this.categoria.status}
     });
   }
 

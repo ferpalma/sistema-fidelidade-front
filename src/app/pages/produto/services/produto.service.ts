@@ -2,62 +2,58 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Categoria } from '../models/categoria';
-
+import { Produto } from '../models/produto';
 @Injectable({
   providedIn: 'root'
 })
-export class CategoriaService {
+export class ProdutoService {
 
-  url = 'http://localhost:8080/fidelidade'; // api rest fake
+  url = 'https://localhost:8080/fidelidade'; // api rest fake
 
   // injetando o HttpClient
   constructor(private httpClient: HttpClient) { }
-
   // Headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
-
-  // Obtem todas as categorias
-  getListaCategoria(): Observable<Categoria[]> {
-    return this.httpClient.get<Categoria[]>(this.url + '/' + 'categorias')
+  // Obtem todos os produtos
+  getListaProduto(): Observable<Produto[]> {
+    return this.httpClient.get<Produto[]>(this.url + '/' + 'produtos')
       .pipe(
         retry(2),
         catchError(this.handleError))
   }
 
-  // Obtem uma categoria pelo id
-  getCategoriaById(id: number): Observable<Categoria> {
-    return this.httpClient.get<Categoria>(this.url + '/' + 'categoria' + '/' + id)
+  // Obtem um produto pelo id
+  getProdutoById(id: number): Observable<Produto> {
+    return this.httpClient.get<Produto>(this.url + '/' + 'produto' + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
 
-  // salva uma categoria
-  saveCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.httpClient.post<Categoria>(this.url + '/' + 'categoria', categoria)
+  // salva um produto
+  saveProduto(produto: Produto): Observable<Produto> {
+    return this.httpClient.post<Produto>(this.url + '/' + 'produto', produto, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       )
   }
 
-  // atualiza uma categoria
-  updateCategoria(categoria: Categoria): Observable<Categoria> {
-    return this.httpClient.put<Categoria>(this.url + '/' + 'categoria' + '/' + categoria.idCategoria, categoria, this.httpOptions)
+  // atualiza um produto
+  updateProduto(produto: Produto): Observable<Produto> {
+    return this.httpClient.put<Produto>(this.url + '/' +  'produto' + '/' + produto.idProduto,  produto, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       )
   }
 
-  // deleta uma categoria
-  deleteCategoria(categoria: Categoria) {
-    console.log(this.url + '/' + 'categoria' + '/' + categoria.idCategoria);
-    return this.httpClient.delete<Categoria>(this.url + '/' + 'categoria' + '/' + categoria.idCategoria, this.httpOptions)
+  // deleta um produto
+  deleteProduto(produto: Produto) {
+    return this.httpClient.delete<Produto>(this.url + '/' +  'produto' + '/' + produto.idProduto, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

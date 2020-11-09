@@ -7,11 +7,9 @@
                 <input type="name" class="form-control">
             </div>
             <div class="form-group col-md-6">
-                <label for="inputState">Categoria</label>
-                <select id="inputState" class="form-control">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
+                <label for="inputState">Produto</label>
+
+                <select ng-model="produto.categoria.idCategoria" data-ng-options="produto.categoria.idCategoria as produto.categoria.nome for produto.categoria in "></select>
             </div>
         </div>
         <div class="form-group">
