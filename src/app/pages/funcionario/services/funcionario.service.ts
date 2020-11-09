@@ -21,7 +21,7 @@ export class FuncionarioService {
 
   // Obtem todos os funcionarios
   getListaFuncionario(): Observable<Funcionario[]> {
-    return this.httpClient.get<Funcionario[]>(this.url)
+    return this.httpClient.get<Funcionario[]>(this.url + '/' + 'funcionarios')
       .pipe(
         retry(2),
         catchError(this.handleError))
@@ -29,7 +29,7 @@ export class FuncionarioService {
 
   // Obtem um funcionario pelo id
   getFuncionarioById(id: number): Observable<Funcionario> {
-    return this.httpClient.get<Funcionario>(this.url + '/' + id)
+    return this.httpClient.get<Funcionario>(this.url + '/' + 'funcionario' + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -38,7 +38,7 @@ export class FuncionarioService {
 
   // salva um funcionario
   saveFuncionario(funcionario: Funcionario): Observable<Funcionario> {
-    return this.httpClient.post<Funcionario>(this.url, JSON.stringify(funcionario), this.httpOptions)
+    return this.httpClient.post<Funcionario>(this.url + '/' + 'funcionario' , funcionario, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -47,7 +47,7 @@ export class FuncionarioService {
 
   // atualiza um funcionario
   updateFuncionario(funcionario: Funcionario): Observable<Funcionario> {
-    return this.httpClient.put<Funcionario>(this.url + '/' + funcionario.id, JSON.stringify(funcionario), this.httpOptions)
+    return this.httpClient.put<Funcionario>(this.url + '/' + 'funcionario' + '/' + funcionario.idFuncionario, funcionario, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -56,7 +56,7 @@ export class FuncionarioService {
 
   // deleta um funcionario
   deleteFuncionario(funcionario: Funcionario) {
-    return this.httpClient.delete<Funcionario>(this.url + '/' + funcionario.id, this.httpOptions)
+    return this.httpClient.delete<Funcionario>(this.url + '/' + 'funcionario' + '/' + funcionario.idFuncionario, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

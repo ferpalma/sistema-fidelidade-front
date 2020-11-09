@@ -61,7 +61,7 @@ export class ListaFuncionarioComponent implements OnInit {
     this.funcionario = { ...funcionario };
     const dialogRef = this.dialog.open(EditarFuncionarioComponent, {
       width: '650px',
-      data: {id: this.funcionario.id, nome: this.funcionario.nome, status: this.funcionario.status, cpf: this.funcionario.cpf, email: this.funcionario.email}
+      data: {id: this.funcionario.idFuncionario, nome: this.funcionario.nome, status: this.funcionario.status, cpf: this.funcionario.cpf, email: this.funcionario.email}
     });
   }
 
