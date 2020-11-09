@@ -9,7 +9,7 @@ import { Funcionario } from '../models/funcionario';
 })
 export class FuncionarioService {
 
-  url = 'https://localhost:8080/fidelidade'; // api rest fake
+  url = 'http://localhost:8080/fidelidade'; // api rest fake
 
   // injetando o HttpClient
   constructor(private httpClient: HttpClient) { }

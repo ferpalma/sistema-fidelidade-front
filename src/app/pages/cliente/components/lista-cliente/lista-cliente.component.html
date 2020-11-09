@@ -1,66 +1,47 @@
 <mat-card class="typography-content__item-wrapper">
-    <mat-card-title class="d-flex justify-content-between">
-        <p>Clientes</p>
-        <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
-            add
-            </span>Adicionar cliente</button>
-    </mat-card-title>
-    <table class="table table-hover table-borderless table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Nome</th>
-                <th scope="col">CPF</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Beatriz Angelica</td>
-                <td>123.456.789-12</td>
-                <td class="text-right">
-                    <!-- <button mat-raised-button style="background-color: aquamarine;">Basic</button>
-                    <button mat-raised-button color="primary">Primary</button> -->
-                    <button mat-raised-button color="accent" class="mr-3">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-                        edit
-                        </span>Editar</button>
-                    <button mat-raised-button style="background-color: #e63946; color: white;">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-                        delete
-                        </span>Apagar</button>
-                </td>
+  <mat-card-title class="d-flex justify-content-between">
+      <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
+      <p>Categorias</p>
+      <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
+          add
+          </span>Adicionar cliente</button>
+  </mat-card-title>
+  <table class="table table-hover table-borderless table-striped">
+      <thead>
+          <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nome</th>
+              <th scope="col">Status</th>
+              <th scope="col">CPF</th>
+              <th scope="col">Email</th>
+              <th scope="col">Telefone</th>
+              <th scope="col">Pontos</th>
+              <th scope="col"></th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- TODO: quem sabe adicionar um paginator -->
+          <tr *ngFor="let cliente of listaCliente">
+              <td>{{cliente.idCliente}}</td>
+              <td *ngIf="cliente.nome">{{cliente.nome}}</td>
+              <td>{{cliente.status ? 'Ativo':'Inativo'}}</td>
+              <td>{{cliente.cpf}}</td>
+              <td>{{cliente.email}}</td>
+              <td>{{cliente.telefone}}</td>
+              <td>{{cliente.pontos}}</td>
 
-            </tr>
-            <tr>
-                <td>Beatriz Angelica</td>
-                <td>123.456.789-12</td>
-                <td class="text-right">
-                    <button mat-raised-button color="accent" class="mr-3">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-                        edit
-                        </span>Editar</button>
-                    <button mat-raised-button style="background-color: #e63946; color: white;">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-                        delete
-                        </span>Apagar</button>
-                </td>
+              <td class="text-right">
+                  <button mat-raised-button color="accent" class="mr-3" (click)="(cliente)">
+                      <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
+                      edit
+                      </span>Editar</button>
+                  <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deleteCliente(cliente)">
+                      <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
+                      delete
+                      </span>Apagar</button>
+              </td>
 
-            </tr>
-            <tr>
-                <td>Beatriz Angelica</td>
-                <td>123.456.789-12</td>
-                <td class="text-right">
-                    <button mat-raised-button color="accent" class="mr-3">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-                        edit
-                        </span>Editar</button>
-                    <button mat-raised-button style="background-color: #e63946; color: white;">
-                        <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-                        delete
-                        </span>Apagar</button>
-                </td>
-
-            </tr>
-        </tbody>
-    </table>
+          </tr>
+      </tbody>
+  </table>
 </mat-card>

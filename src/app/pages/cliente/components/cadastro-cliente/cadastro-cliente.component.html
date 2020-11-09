@@ -1,0 +1,67 @@
+<h3 mat-dialog-title class="mb-4">Cadastrar cliente</h3>
+<div mat-dialog-content>
+    <form id="add-form" (ngSubmit)="f.form.valid && saveCliente(f)" #f="ngForm" novalidate>
+
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" [(ngModel)]="cliente.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
+                    <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
+                        <div *ngIf="nome.errors.required">Nome é obrigatório</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="cpf">CPF</label>
+                    <input type="text" [(ngModel)]="cliente.cpf" id="cpf" name="cpf" #cpf="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="000.000.000-00">
+                    <div *ngIf="f.submitted && cpf.invalid" class="invalid-feedback">
+                        <div *ngIf="cpf.errors.required">CPF é obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" [(ngModel)]="cliente.email" id="email" name="email" #email="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="exemplo@email.com">
+                    <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                        <div *ngIf="email.errors.required">E-mail é obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" [(ngModel)]="cliente.telefone" id="telefone" name="telefone" #telefone="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && cpf.invalid }" placeholder="Digite o telefone">
+                    <div *ngIf="f.submitted && telefone.invalid" class="invalid-feedback">
+                        <div *ngIf="telefone.errors.required">telefone é obrigatório</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group form-check">
+            <input type="checkbox" [(ngModel)]="cliente.status" id="status" name="status" #status="ngModel" class="form-check-input" checked>
+            <label class="form-check-label" for="status">Ativo</label>
+        </div>
+
+
+        <div class="d-flex justify-content-between">
+
+            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="cleanForm(f)">
+                Limpar</button>
+            <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;">
+                Salvar</button>
+        </div>
+    </form>
+</div>
