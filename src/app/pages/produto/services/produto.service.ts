@@ -8,7 +8,7 @@ import { Produto } from '../models/produto';
 })
 export class ProdutoService {
 
-  url = 'https://localhost:8080/fidelidade'; // api rest fake
+  url = 'http://localhost:8080/fidelidade'; // api rest fake
 
   // injetando o HttpClient
   constructor(private httpClient: HttpClient) { }

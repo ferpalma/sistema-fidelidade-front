@@ -34,6 +34,8 @@ export class CadastroProdutoComponent implements OnInit {
 
   // define se uma produto será criada ou atualizada
   saveProduto(form: NgForm) {
+    console.log(this.produto);
+    console.log(this.categoria);
     this.produtoService.saveProduto(this.produto).subscribe(() => {
       this.cleanForm(form);
     });
@@ -61,9 +63,9 @@ export class CadastroProdutoComponent implements OnInit {
 
   onSelectName({id, nome}): void {
     // this.selectedName = name;         // Not Recommended; With this, you can now reset the selectedName value to just the name value
- 
-    this.categoria.nome = nome;                 // Create new variable to store the name, if you will reassign the selectedName model value which holds ID and Name based on the template [ngValue], it will not reflect the updated data if you reassign it to just name. I suggest you create new one that acts as your official model name to store the selected name. 
- 
+
+    this.categoria.nome = nome;                 // Create new variable to store the name, if you will reassign the selectedName model value which holds ID and Name based on the template [ngValue], it will not reflect the updated data if you reassign it to just name. I suggest you create new one that acts as your official model name to store the selected name.
+
     console.log(id);                  // and fetch its ID as well, depends on how you want to use this.
  }
 }

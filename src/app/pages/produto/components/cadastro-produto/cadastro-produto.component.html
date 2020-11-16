@@ -11,12 +11,12 @@
         </div>
 
         <div class="form-group form-check">
-            <select [ngModel]="categoria" (ngModelChange)="onSelectName($event)" class="form-control">
+            <select [ngModel]="produto.categoria" (ngModelChange)="onSelectName($event)" class="form-control">
 
                 <option value=""></option>
 
-                <option *ngFor="let categoria of listaCategoria" 
-                        [ngValue]="{ id: categoria.idCategoria, name: categoria.nome }">  
+                <option *ngFor="let categoria of listaCategoria"
+                        [ngValue]="{ id: categoria.idCategoria, name: categoria.nome }">
                     {{categoria.nome}}
                 </option>
             </select>
