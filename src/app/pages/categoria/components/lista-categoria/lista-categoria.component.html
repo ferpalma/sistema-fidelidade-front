@@ -1,6 +1,5 @@
 <mat-card class="typography-content__item-wrapper">
     <mat-card-title class="d-flex justify-content-between">
-        <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
         <p>Categorias</p>
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
             add
@@ -16,14 +15,11 @@
             </tr>
         </thead>
         <tbody>
-            <!-- TODO: quem sabe adicionar um paginator -->
             <tr *ngFor="let cat of listaCategoria">
                 <td>{{cat.idCategoria}}</td>
                 <td>{{cat.nome}}</td>
                 <td>{{cat.status ? 'Ativo' : 'Inativo'}}</td>
                 <td class="text-right">
-                    <!-- <button mat-raised-button style="background-color: aquamarine;">Basic</button>
-                    <button mat-raised-button color="primary">Primary</button> -->
                     <button mat-raised-button color="accent" class="mr-3" (click)="editCategoria(cat)">
                         <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
                         edit
@@ -33,7 +29,6 @@
                         delete
                         </span>Apagar</button>
                 </td>
-
             </tr>
         </tbody>
     </table>

@@ -57,4 +57,14 @@ export class CadastroCategoriaComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public verificaValidTouched(campo: any) {
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+
+  public aplicaCssErro(campo: any) {
+    return {
+      'border-red': this.verificaValidTouched(campo)
+    };
+  }
+
 }
