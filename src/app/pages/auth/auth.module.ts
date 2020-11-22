@@ -9,15 +9,17 @@ import { AuthPageComponent } from './containers';
 import { AuthRoutingModule } from './auth-routing.module';
 import { YearPipe } from './pipes';
 import { AuthService, EmailService } from './services';
-import { LoginFormComponent, SignFormComponent } from './components';
+import { LoginFormComponent, } from './components';
 import { AuthGuard } from './guards';
+import { LoginAdmFormComponent } from './components/login-adm-form/login-adm-form.component';
 
 @NgModule({
   declarations: [
     AuthPageComponent,
     YearPipe,
     LoginFormComponent,
-    SignFormComponent
+    LoginAdmFormComponent
+
   ],
   imports: [
     CommonModule,
