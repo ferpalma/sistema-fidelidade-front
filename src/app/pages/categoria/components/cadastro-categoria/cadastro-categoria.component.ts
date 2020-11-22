@@ -27,6 +27,7 @@ export class CadastroCategoriaComponent implements OnInit {
 
   // define se uma categoria será criada ou atualizada
   saveCategoria(form: NgForm) {
+    console.log(this.categoria);
     this.categoriaService.saveCategoria(this.categoria).subscribe(() => {
       this.cleanForm(form);
     });

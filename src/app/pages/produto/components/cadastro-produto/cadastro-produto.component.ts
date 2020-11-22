@@ -21,7 +21,8 @@ export class CadastroProdutoComponent implements OnInit {
   produto = {} as Produto;
   listaProduto: Produto[];
 
-  constructor(private produtoService: ProdutoService, private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroProdutoComponent>, @Inject(MAT_DIALOG_DATA) public data: Produto) {}
+  constructor(private produtoService: ProdutoService, private categoriaService: CategoriaService, 
+    public dialogRef: MatDialogRef<CadastroProdutoComponent>, @Inject(MAT_DIALOG_DATA) public data: Produto) {}
 
   ngOnInit() {
     this.getListaProduto();

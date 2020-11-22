@@ -15,7 +15,10 @@ export class EditarCategoriaComponent implements OnInit {
   // categoria = {} as Categoria;
   listaCategoria: Categoria[];
 
-  constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<EditarCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public categoria: Categoria) {}
+  constructor(private categoriaService: CategoriaService, 
+    public dialogRef: MatDialogRef<EditarCategoriaComponent>, 
+    @Inject(MAT_DIALOG_DATA) 
+    public categoria: Categoria) {}
   
   ngOnInit() {
     this.getListaCategoria();
@@ -28,7 +31,9 @@ export class EditarCategoriaComponent implements OnInit {
 
   // define se uma categoria será atualizada
   saveCategoria(form: NgForm) {
-    this.categoriaService.updateCategoria(this.categoria).subscribe(() => {
+    console.log(this.categoria);
+    this.categoriaService.updateCategoria(this.categoria)
+    .subscribe(() => {
       this.cleanForm(form);
     });
   }
