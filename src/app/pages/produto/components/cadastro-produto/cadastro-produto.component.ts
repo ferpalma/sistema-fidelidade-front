@@ -21,6 +21,8 @@ export class CadastroProdutoComponent implements OnInit {
   produto = {} as Produto;
   listaProduto: Produto[];
 
+  selectedFile: File;
+
   constructor(private produtoService: ProdutoService, private categoriaService: CategoriaService, 
     public dialogRef: MatDialogRef<CadastroProdutoComponent>, @Inject(MAT_DIALOG_DATA) public data: Produto) {}
 
@@ -39,6 +41,19 @@ export class CadastroProdutoComponent implements OnInit {
     console.log(this.categoria);
     this.produtoService.saveProduto(this.produto).subscribe(() => {
       this.cleanForm(form);
+    });
+  }
+
+  updateImagem() {
+
+    console.log(this.selectedFile);
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.produto.nome);
+  
+    console.log(this.produto);
+    console.log(this.categoria);
+
+    this.produtoService.updateImagem(uploadImageData).subscribe(() => {      
     });
   }
     // Chama o serviço para obter todas as categorias

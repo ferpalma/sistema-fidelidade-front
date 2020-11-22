@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { CategoriaService } from '../../services/categoria.service';
 import { Categoria } from '../../models/categoria';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro-categoria',
@@ -12,38 +12,49 @@ import { NgForm } from '@angular/forms';
 })
 export class CadastroCategoriaComponent implements OnInit {
 
-  categoria = {} as Categoria;
-  listaCategoria: Categoria[];
+  public formulario: FormGroup;
 
-  constructor(private categoriaService: CategoriaService, public dialogRef: MatDialogRef<CadastroCategoriaComponent>, @Inject(MAT_DIALOG_DATA) public data: Categoria) {}
-  
-  ngOnInit() {
-    this.getListaCategoria();
+  constructor(private categoriaService: CategoriaService,
+    public dialogRef: MatDialogRef<CadastroCategoriaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Categoria) { }
+
+  public ngOnInit() {
+    console.log("CadastroCategoriaComponent :" + this.data);
+    this.novoFormulario();
+    if (this.data != null) {
+      this.formulario.get('idCategoria').setValue(this.data.idCategoria);
+      this.formulario.get('nome').setValue(this.data.nome);
+      this.formulario.get('status').setValue(this.data.status);
+    }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  private novoFormulario(): void {
+    this.formulario = new FormGroup({
+      idCategoria: new FormControl(null),
+      nome: new FormControl(null, Validators.required),
+      status: new FormControl(null, Validators.required)
+    });
   }
 
   // define se uma categoria será criada ou atualizada
-  saveCategoria(form: NgForm) {
-    console.log(this.categoria);
-    this.categoriaService.saveCategoria(this.categoria).subscribe(() => {
-      this.cleanForm(form);
-    });
+  public saveCategoria() {    
+    if (this.formulario.get('idCategoria') != null) {
+      console.log("updateCategoria :"+this.formulario.value);
+      this.categoriaService.updateCategoria(this.formulario.value).subscribe(() => {
+        this.resetar();
+      });
+    } else {
+      console.log("saveCategoria :"+this.formulario.value);
+      this.categoriaService.saveCategoria(this.formulario.value).subscribe(() => {
+        this.resetar();
+      });
+    }
   }
 
-  // Chama o serviço para obter todas as categorias
-  getListaCategoria() {
-    this.categoriaService.getListaCategoria().subscribe((listaCategoria: Categoria[]) => {
-      this.listaCategoria = listaCategoria;
-    });
+  // resetar formulário
+  public resetar(): void {
+    this.formulario.reset();
+    this.dialogRef.close();
   }
 
-  // limpa o formulario
-  cleanForm(form: NgForm) {
-    this.getListaCategoria();
-    form.resetForm();
-    this.categoria = {} as Categoria;
-  }
 }
