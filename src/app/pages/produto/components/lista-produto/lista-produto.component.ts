@@ -16,8 +16,6 @@ export class ListaProdutoComponent implements OnInit {
 
   public listaProdutos$: Observable<Produto[]>;
 
-  panelOpenState = false;
-
   ngOnInit(): void {
     this.getListaProdutos();
   }

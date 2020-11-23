@@ -8,6 +8,7 @@ import { ProdutoService } from '../../services/produto.service';
 
 import { Produto } from '../../models/produto';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+
 @Component({
   selector: 'app-cadastro-produto',
   templateUrl: './cadastro-produto.component.html',
@@ -50,16 +51,13 @@ export class CadastroProdutoComponent implements OnInit {
       pontosRetirada: new FormControl(null, Validators.required),
       imagem: new FormControl(null),
       type: new FormControl(null),
+      
       categoria: this.formBuilder.group({
         idCategoria: new FormControl(null),
         nome: new FormControl(null, Validators.required),
         status: new FormControl(null, Validators.required)
       })
     });
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
   // define se uma produto será criada ou atualizada
@@ -96,8 +94,8 @@ export class CadastroProdutoComponent implements OnInit {
   }
 
   //compara categorias
-  public compararCategorias(obj1, obj2) {
-    return obj1 && obj2 ? (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) : obj1 === obj2;
+  public compararCategorias(obj1: any, obj2: any) {
+    return obj1 && obj2 ? (obj1.nome === obj2.nome) : obj1 === obj2;
   }
   
 }
