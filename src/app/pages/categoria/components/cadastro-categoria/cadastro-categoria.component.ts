@@ -57,10 +57,12 @@ export class CadastroCategoriaComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  //valida o campo do formulário
   public verificaValidTouched(campo: any) {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
+  //aplica css de alerta para campo inválido
   public aplicaCssErro(campo: any) {
     return {
       'border-red': this.verificaValidTouched(campo)

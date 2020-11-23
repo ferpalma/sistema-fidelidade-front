@@ -10,7 +10,6 @@ import { Categoria } from '../models/categoria';
 export class CategoriaService {
 
   url = 'http://localhost:8080/fidelidade';
-  // url = 'http://localhost:3000';
 
   // injetando o HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -21,7 +20,7 @@ export class CategoriaService {
   }
 
   // Obtem todas as categorias
-  getListaCategoria(): Observable<Categoria[]> {
+  getListaCategorias(): Observable<Categoria[]> {
     return this.httpClient.get<Categoria[]>(this.url + '/' + 'categorias')
       .pipe(
         retry(2),

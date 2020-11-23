@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -14,44 +15,44 @@ import { CadastroCategoriaComponent } from '../cadastro-categoria/cadastro-categ
 })
 export class ListaCategoriaComponent implements OnInit {
 
-  public listaCategoria: Categoria[];
+  public listaCategorias$: Observable<Categoria[]>;
 
   ngOnInit(): void {
-    this.getListaCategoria();
+    this.getListaCategorias();
   }
 
-  constructor(public dialog: MatDialog, private categoriaService: CategoriaService) { }
+  constructor(public dialog: MatDialog, 
+    private categoriaService: CategoriaService) { }
 
   // Chama o serviço para obtém todas as categorias
-  private getListaCategoria() {
-    this.categoriaService.getListaCategoria().subscribe((listaCategoria: Categoria[]) => {
-      this.listaCategoria = listaCategoria;
-    });
+  private getListaCategorias() {
+    this.listaCategorias$ = this.categoriaService.getListaCategorias();
   }
 
   public openDialog() {
     this.dialog.open(CadastroCategoriaComponent, {
-      width: '450px'
+      width: '50%'
     });
-    this.dialog.afterAllClosed.subscribe(() => { this.getListaCategoria(); });
+    this.dialog.afterAllClosed.subscribe(() => { this.getListaCategorias(); });
   }
 
   // deleta uma categoria
   public deleteCategoria(categoria: Categoria) {
     console.log("deleteCategoria :" + categoria.nome);
     this.categoriaService.deleteCategoria(categoria).subscribe((res) => {
-      this.getListaCategoria();
+      this.getListaCategorias();
     });
   }
 
   public editCategoria(categoria: Categoria): void {
     console.log("editCategoria :" + categoria.nome);
     this.dialog.open(CadastroCategoriaComponent, {
-      width: '450px',
+      width: '50%',
       data: categoria
     });
-    this.dialog.afterAllClosed.subscribe(() => { this.getListaCategoria(); });    
+    this.dialog.afterAllClosed.subscribe(() => { this.getListaCategorias(); });    
   }
+  
 }
 
 

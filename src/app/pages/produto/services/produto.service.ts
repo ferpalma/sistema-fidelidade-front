@@ -17,7 +17,7 @@ export class ProdutoService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
   // Obtem todos os produtos
-  getListaProduto(): Observable<Produto[]> {
+  getListaProdutos(): Observable<Produto[]> {
     return this.httpClient.get<Produto[]>(this.url + '/' + 'produtos')
       .pipe(
         retry(2),
@@ -25,7 +25,7 @@ export class ProdutoService {
   }
 
     // Obtem todos os produtos ativos
-    getListaProdutoAtivos(): Observable<Produto[]> {
+    getListaProdutosAtivos(): Observable<Produto[]> {
       return this.httpClient.get<Produto[]>(this.url + '/' + 'produtos/ativos')
         .pipe(
           retry(2),

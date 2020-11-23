@@ -1,90 +1,26 @@
 <mat-card class="typography-content__item-wrapper">
     <mat-card-title class="d-flex justify-content-between">
-        <div class="employee-table-wrapper__search">
-            <div class="employee-table-wrapper__icon-wrapper">
-                <mat-icon class="employee-table-wrapper__icon">search</mat-icon>
-            </div>
-            <input matInput class="employee-table-wrapper__search-input">
-            <button class="employee-table-wrapper__button" mat-mini-fab>
-              <mat-icon class="employee-table-wrapper__icon">close</mat-icon>
-            </button>
-        </div>
+        <p>Produtos</p>
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
             add
             </span>Adicionar produto</button>
     </mat-card-title>
-
 </mat-card>
-
-<mat-card class="typography-content__item-wrapper">
-    <mat-card-title class="d-flex justify-content-between">
-        <p>Coquinha gelada</p>
-        <div>
-            <button mat-raised-button color="accent" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-            edit
-            </span>Editar</button>
-            <button mat-raised-button style="background-color: #e63946; color: white;" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-            delete
-            </span>Apagar</button>
-        </div>
-    </mat-card-title>
-    <img mat-card-image src="https://araujo.vteximg.com.br/arquivos/ids/3959579-1000-1000/07894900010015.jpg?v=637364033320400000" class="imagem">
-
-
-</mat-card>
-
-<mat-card class="typography-content__item-wrapper">
-    <mat-card-title class="d-flex justify-content-between">
-        <p>Saguadin</p>
-        <div>
-            <button mat-raised-button color="accent" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-            edit
-            </span>Editar</button>
-            <button mat-raised-button style="background-color: #e63946; color: white;" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-            delete
-            </span>Apagar</button>
-        </div>
-    </mat-card-title>
-    <img mat-card-image src="https://nutrimassasesalgados.com/wp-content/uploads/2020/05/MG_6472-copiar-1.jpg" class="imagem">
-
-</mat-card>
-
-<mat-card class="typography-content__item-wrapper">
-    <mat-card-title class="d-flex justify-content-between">
-        <p>Podrao</p>
-        <div>
-            <button mat-raised-button color="accent" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-            edit
-            </span>Editar</button>
-            <button mat-raised-button style="background-color: #e63946; color: white;" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-            delete
-            </span>Apagar</button>
-        </div>
-    </mat-card-title>
-    <img mat-card-image src="https://uploads.metropoles.com/wp-content/uploads/2019/04/11175357/big-beef-chicken1.jpg" class="imagem">
-
-</mat-card>
-
-<mat-card class="typography-content__item-wrapper">
-    <mat-card-title class="d-flex justify-content-between">
-        <p>Sorvete</p>
-        <div>
-            <button mat-raised-button color="accent" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-            edit
-            </span>Editar</button>
-            <button mat-raised-button style="background-color: #e63946; color: white;" class="mr-3">
-            <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-            delete
-            </span>Apagar</button>
-        </div>
-    </mat-card-title>
-    <img mat-card-image src="https://www.saborama.com.br/wp-content/uploads/2017/10/economize-fazendo-sorvete.jpg" class="imagem">
-
-</mat-card>
+<div *ngFor="let prod of listaProdutos$ | async">
+    <mat-card class="typography-content__item-wrapper">
+        <mat-card-title class="d-flex justify-content-between">
+            <p>{{prod.idProduto}} - {{prod.nome}} - {{prod.status ? 'Ativo' : 'Inativo'}}</p>
+            <div>
+                <button mat-raised-button color="accent" class="mr-3" (click)="editProduto(prod)">
+                <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
+                edit
+                </span>Editar</button>
+                <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deleteProduto(prod)">
+                <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
+                delete
+                </span>Apagar</button>
+            </div>
+        </mat-card-title>
+        <img mat-card-image src="{{prod.type}}" class="imagem ">
+    </mat-card>
+</div>
