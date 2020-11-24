@@ -13,6 +13,7 @@ import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 export class CadastroCategoriaComponent implements OnInit {
 
   public formulario: FormGroup;
+  public msgError: string;
 
   constructor(private categoriaService: CategoriaService,
     public dialogRef: MatDialogRef<CadastroCategoriaComponent>,
@@ -40,13 +41,25 @@ export class CadastroCategoriaComponent implements OnInit {
   public saveCategoria() {    
     if (this.formulario.get('idCategoria') != null) {
       console.log("updateCategoria :"+this.formulario.value);
-      this.categoriaService.updateCategoria(this.formulario.value).subscribe(() => {
-        this.resetar();
-      });
+      this.categoriaService.updateCategoria(this.formulario.value).subscribe(
+        (sucesso) => {
+          console.log(sucesso);
+          this.resetar();
+        },
+        error => {
+          this.msgError = error;
+          console.log(error);
+        });
     } else {
       console.log("saveCategoria :"+this.formulario.value);
-      this.categoriaService.saveCategoria(this.formulario.value).subscribe(() => {
+      this.categoriaService.saveCategoria(this.formulario.value).subscribe(
+        (sucesso) => {
+        console.log(sucesso);
         this.resetar();
+      },
+      error => {
+        this.msgError = error;
+        console.log(error);
       });
     }
   }

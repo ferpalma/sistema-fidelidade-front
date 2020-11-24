@@ -1,4 +1,5 @@
-import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { empty, Observable, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -16,32 +17,48 @@ import { CadastroCategoriaComponent } from '../cadastro-categoria/cadastro-categ
 export class ListaCategoriaComponent implements OnInit {
 
   public listaCategorias$: Observable<Categoria[]>;
+  public msgError: string;
 
   ngOnInit(): void {
     this.getListaCategorias();
   }
 
-  constructor(public dialog: MatDialog, 
+  constructor(public dialog: MatDialog,
     private categoriaService: CategoriaService) { }
 
   // Chama o serviço para obtém todas as categorias
   private getListaCategorias() {
-    this.listaCategorias$ = this.categoriaService.getListaCategorias();
+    this.listaCategorias$ = this.categoriaService.getListaCategorias()
+      .pipe(
+        catchError(error => {
+          this.msgError = error;
+          console.log(error);
+          return empty();
+        })
+      );
   }
 
   public openDialog() {
     this.dialog.open(CadastroCategoriaComponent, {
       width: '50%'
     });
-    this.dialog.afterAllClosed.subscribe(() => { this.getListaCategorias(); });
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getListaCategorias();
+    });
   }
 
   // deleta uma categoria
   public deleteCategoria(categoria: Categoria) {
     console.log("deleteCategoria :" + categoria.nome);
-    this.categoriaService.deleteCategoria(categoria).subscribe((res) => {
-      this.getListaCategorias();
-    });
+    this.categoriaService.deleteCategoria(categoria).subscribe(
+      (sucesso) => {
+        console.log(sucesso);
+        this.getListaCategorias();
+      },
+      error => {
+        this.msgError = error;
+        console.log(error);
+      });
   }
 
   public editCategoria(categoria: Categoria): void {
@@ -50,9 +67,16 @@ export class ListaCategoriaComponent implements OnInit {
       width: '50%',
       data: categoria
     });
-    this.dialog.afterAllClosed.subscribe(() => { this.getListaCategorias(); });    
+    this.dialog.afterAllClosed.subscribe((sucesso) => {
+      console.log(sucesso);
+      this.getListaCategorias();
+    },
+      error => {
+        this.msgError = error;
+        console.log(error);
+      });
   }
-  
+
 }
 
 
