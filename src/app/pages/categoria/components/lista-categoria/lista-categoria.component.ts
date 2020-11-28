@@ -12,7 +12,7 @@ import { CadastroCategoriaComponent } from '../cadastro-categoria/cadastro-categ
 @Component({
   selector: 'app-lista-categoria',
   templateUrl: './lista-categoria.component.html',
-  styleUrls: ['./lista-categoria.component.scss']
+  styleUrls: ['./lista-categoria.component.css']
 })
 export class ListaCategoriaComponent implements OnInit {
 
