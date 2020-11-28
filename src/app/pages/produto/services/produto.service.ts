@@ -17,12 +17,20 @@ export class ProdutoService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
   // Obtem todos os produtos
-  getListaProduto(): Observable<Produto[]> {
+  getListaProdutos(): Observable<Produto[]> {
     return this.httpClient.get<Produto[]>(this.url + '/' + 'produtos')
       .pipe(
         retry(2),
         catchError(this.handleError))
   }
+
+    // Obtem todos os produtos ativos
+    getListaProdutosAtivos(): Observable<Produto[]> {
+      return this.httpClient.get<Produto[]>(this.url + '/' + 'produtos/ativos')
+        .pipe(
+          retry(2),
+          catchError(this.handleError))
+    }
 
   // Obtem um produto pelo id
   getProdutoById(id: number): Observable<Produto> {
@@ -32,6 +40,15 @@ export class ProdutoService {
         catchError(this.handleError)
       )
   }
+
+    // Obtem um produto pelo nome
+    getProdutoByNome(nome: string): Observable<Produto> {
+      return this.httpClient.get<Produto>(this.url + '/' + 'produto/nome/' + nome)
+        .pipe(
+          retry(2),
+          catchError(this.handleError)
+        )
+    }
 
   // salva um produto
   saveProduto(produto: Produto): Observable<Produto> {
@@ -44,7 +61,7 @@ export class ProdutoService {
 
   // atualiza um produto
   updateProduto(produto: Produto): Observable<Produto> {
-    return this.httpClient.put<Produto>(this.url + '/' +  'produto' + '/' + produto.idProduto,  produto, this.httpOptions)
+    return this.httpClient.put<Produto>(this.url + '/' +  'produto',  produto, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -56,6 +73,14 @@ export class ProdutoService {
     return this.httpClient.delete<Produto>(this.url + '/' +  'produto' + '/' + produto.idProduto, this.httpOptions)
       .pipe(
         retry(1),
+        catchError(this.handleError)
+      )
+  }
+
+  updateImagem(uploadImageData: any): Observable<Produto> {
+    return this.httpClient.post<Produto>(this.url + '/produto/upload-imagem', uploadImageData, this.httpOptions)
+      .pipe(
+        retry(2),
         catchError(this.handleError)
       )
   }

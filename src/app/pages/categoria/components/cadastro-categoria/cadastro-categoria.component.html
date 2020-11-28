@@ -1,27 +1,32 @@
 <h3 mat-dialog-title class="mb-4">Cadastrar categoria</h3>
 <div mat-dialog-content>
-    <form id="add-form" (ngSubmit)="f.form.valid && saveCategoria(f)" #f="ngForm" novalidate>
+    <form id="add-form" (ngSubmit)="saveCategoria()" [formGroup]="formulario" novalidate>
+
+        <mat-card class="fundo-lightcoral" *ngIf="msgError"><span>{{ msgError }}</span></mat-card>
+
+        <div class="form-group" hidden>
+            <label for="idCategoria">idCategoria</label>
+            <input type="text" id="idCategoria" formControlName="idCategoria" class="form-control">
+        </div>
 
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" [(ngModel)]="categoria.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
-            <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
-                <div *ngIf="nome.errors.required">Nome é obrigatório</div>
+            <input type="text" id="nome" formControlName="nome" class="form-control" placeholder="Digite o nome" [ngClass]="aplicaCssErro('nome')">
+            <div *ngIf="verificaValidTouched('nome')">
+                <span class="font-red">Nome é obrigatório</span>
             </div>
         </div>
 
         <div class="form-group form-check">
-            <input type="checkbox" [(ngModel)]="categoria.status" id="status" name="status" #status="ngModel" class="form-check-input" checked>
+            <input type="checkbox" id="status" formControlName="status" class="form-check-input" checked>
             <label class="form-check-label" for="status">Ativo</label>
         </div>
 
-
         <div class="d-flex justify-content-between">
-
-            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="cleanForm(f)">
+            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="resetar()">
                 Limpar</button>
             <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;">
                 Salvar</button>
         </div>
-      </form>
+    </form>
 </div>

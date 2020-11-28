@@ -7,7 +7,7 @@ import { CategoriaPageComponent } from './containers';
 import { CategoriaRoutingModule } from './categoria-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -15,11 +15,12 @@ import { ListaCategoriaComponent } from './components/lista-categoria/lista-cate
 
 import {MatButtonModule} from '@angular/material/button';
 import { CadastroCategoriaComponent } from './components/cadastro-categoria/cadastro-categoria.component';
-import { EditarCategoriaComponent } from './components/editar-categoria/editar-categoria.component';
 
 
 @NgModule({
-  declarations: [CategoriaPageComponent, ListaCategoriaComponent, CadastroCategoriaComponent, EditarCategoriaComponent],
+  declarations: [CategoriaPageComponent,
+    ListaCategoriaComponent, 
+    CadastroCategoriaComponent],
   imports: [
     CommonModule,
     CategoriaRoutingModule,
@@ -29,7 +30,8 @@ import { EditarCategoriaComponent } from './components/editar-categoria/editar-c
     MatFormFieldModule,
     SharedModule,
     FormsModule,
-    MatButtonModule
+    MatButtonModule,    
+    ReactiveFormsModule,
   ]
 })
 export class CategoriaModule { }

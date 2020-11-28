@@ -1,3 +1,7 @@
+import { InputFieldComponent } from './input-field/input-field.component';
+import { ErrorMsgComponent } from './error-msg/error-msg.component';
+import { CampoControlErroComponent } from './campo-control-erro/campo-control-erro.component';
+import { FormDebugComponent } from './form-debug/form-debug.component';
 import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { HeaderModule } from './header/header.module';
@@ -23,7 +27,11 @@ import { LayoutComponent } from './layout/layout.component';
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,
-    LayoutComponent
+    LayoutComponent,
+    FormDebugComponent,
+    CampoControlErroComponent,
+    ErrorMsgComponent,
+    InputFieldComponent
   ],
   imports: [
     HeaderModule,
@@ -35,7 +43,9 @@ import { LayoutComponent } from './layout/layout.component';
     MatMenuModule,
     MatSelectModule,
     FormsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderModule,
@@ -43,7 +53,11 @@ import { LayoutComponent } from './layout/layout.component';
     FooterComponent,
     SettingsMenuComponent,
     DateMenuComponent,
-    LayoutComponent
+    LayoutComponent,
+    FormDebugComponent,
+    CampoControlErroComponent,
+    ErrorMsgComponent,
+    InputFieldComponent
   ]
 })
 export class SharedModule { }

@@ -1,35 +1,58 @@
 <h3 mat-dialog-title class="mb-4">Cadastro de produto</h3>
 <div mat-dialog-content>
-    <form id="add-form" (ngSubmit)="f.form.valid && saveProduto(f)" #f="ngForm" novalidate>
+    <form id="add-form-Produto" (ngSubmit)="saveProduto()" [formGroup]="formulario" novalidate>
+
+        <div class="form-group" hidden>
+            <label for="idProduto">idProduto</label>
+            <input type="text" id="idProduto" formControlName="idProduto" class="form-control">
+        </div>
 
         <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" [(ngModel)]="produto.nome" id="nome" name="nome" #nome="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': f.submitted && nome.invalid }" placeholder="Digite o nome">
-            <div *ngIf="f.submitted && nome.invalid" class="invalid-feedback">
-                <div *ngIf="nome.errors.required">Nome é obrigatório</div>
+            <input type="text" id="nome" formControlName="nome" class="form-control" placeholder="Digite o nome" [ngClass]="aplicaCssErro('nome')">
+            <div *ngIf="verificaValidTouched('nome')">
+                <span class="font-red">Nome é obrigatório</span>
             </div>
         </div>
 
         <div class="form-group form-check">
-            <select [ngModel]="produto.categoria" (ngModelChange)="onSelectName($event)" class="form-control">
-
-                <option value=""></option>
-
-                <option *ngFor="let categoria of listaCategoria"
-                        [ngValue]="{ id: categoria.idCategoria, name: categoria.nome }">
-                    {{categoria.nome}}
-                </option>
-            </select>
-            <br />
+            <input type="checkbox" id="status" formControlName="status" class="form-check-input" checked>
+            <label class="form-check-label" for="status">Ativo</label>
         </div>
 
+        <div class="form-group">
+            <label for="pontosRecebidos">Pontos Recebidos</label>
+            <input type="text" id="pontosRecebidos" formControlName="pontosRecebidos" class="form-control" [ngClass]="aplicaCssErro('pontosRecebidos')">
+            <div *ngIf="verificaValidTouched('pontosRecebidos')">
+                <span class="font-red">Pontos Recebidos é obrigatório</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="pontosRetirada">Pontos Retirada</label>
+            <input type="text" id="pontosRetirada" formControlName="pontosRetirada" class="form-control" [ngClass]="aplicaCssErro('pontosRetirada')">
+            <div *ngIf="verificaValidTouched('pontosRetirada')">
+                <span class="font-red">Pontos Retirada é obrigatório</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4" [ngClass]="aplicaCssErro('categoria')">
+                <label for="categoria" class="control-label">Categoria</label>
+                <select class="form-control" id="categoria" formControlName="categoria" [compareWith]="compararCategorias">
+                <option *ngFor="let categoria of categorias$ | async" [ngValue]="categoria">{{ categoria.nome }}</option>
+              </select>
+            </div>
+        </div>
 
         <div class="d-flex justify-content-between">
-
-            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="cleanForm(f)">
+            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="resetar()">
                 Limpar</button>
             <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;">
                 Salvar</button>
         </div>
+
+        <app-form-debug [form]="formulario"></app-form-debug>
+
     </form>
 </div>
