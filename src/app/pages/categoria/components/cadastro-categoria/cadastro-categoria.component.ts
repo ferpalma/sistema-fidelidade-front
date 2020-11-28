@@ -20,7 +20,8 @@ export class CadastroCategoriaComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Categoria) { }
 
   public ngOnInit() {
-    console.log("CadastroCategoriaComponent :" + this.data);
+    this.msgError = null;
+    console.log("ngOnInit CadastroCategoriaComponent :" + this.data);
     this.novoFormulario();
     if (this.data != null) {
       this.formulario.get('idCategoria').setValue(this.data.idCategoria);
@@ -40,34 +41,33 @@ export class CadastroCategoriaComponent implements OnInit {
   // define se uma categoria será criada ou atualizada
   public saveCategoria() {    
     if (this.formulario.get('idCategoria') != null) {
-      console.log("updateCategoria :"+this.formulario.value);
+      console.log("updateCategoria CadastroCategoriaComponent: " + this.formulario.value);
       this.categoriaService.updateCategoria(this.formulario.value).subscribe(
         (sucesso) => {
           console.log(sucesso);
-          this.resetar();
+          this.dialogRef.close();
         },
         error => {
           this.msgError = error;
-          console.log(error);
+          console.log("error updateCategoria CadastroCategoriaComponent: " + error);
         });
     } else {
-      console.log("saveCategoria :"+this.formulario.value);
+      console.log("saveCategoria CadastroCategoriaComponent: " + this.formulario.value);
       this.categoriaService.saveCategoria(this.formulario.value).subscribe(
         (sucesso) => {
         console.log(sucesso);
-        this.resetar();
+        this.dialogRef.close();
       },
       error => {
         this.msgError = error;
-        console.log(error);
+        console.log("error saveCategoria CadastroCategoriaComponent: " + error);
       });
     }
   }
-
   // resetar formulário
   public resetar(): void {
     this.formulario.reset();
-    this.dialogRef.close();
+    this.msgError = null;
   }
 
   //valida o campo do formulário

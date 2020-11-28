@@ -20,6 +20,7 @@ export class ListaCategoriaComponent implements OnInit {
   public msgError: string;
 
   ngOnInit(): void {
+    this.msgError = null;
     this.getListaCategorias();
   }
 
@@ -32,7 +33,7 @@ export class ListaCategoriaComponent implements OnInit {
       .pipe(
         catchError(error => {
           this.msgError = error;
-          console.log(error);
+          console.log("getListaCategorias ListaCategoriaComponent : " + error);
           return empty();
         })
       );
@@ -49,7 +50,6 @@ export class ListaCategoriaComponent implements OnInit {
 
   // deleta uma categoria
   public deleteCategoria(categoria: Categoria) {
-    console.log("deleteCategoria :" + categoria.nome);
     this.categoriaService.deleteCategoria(categoria).subscribe(
       (sucesso) => {
         console.log(sucesso);
@@ -57,12 +57,11 @@ export class ListaCategoriaComponent implements OnInit {
       },
       error => {
         this.msgError = error;
-        console.log(error);
+        console.log("error deleteCategoria ListaCategoriaComponent : " + error);
       });
   }
 
   public editCategoria(categoria: Categoria): void {
-    console.log("editCategoria :" + categoria.nome);
     this.dialog.open(CadastroCategoriaComponent, {
       width: '50%',
       data: categoria
@@ -73,7 +72,7 @@ export class ListaCategoriaComponent implements OnInit {
     },
       error => {
         this.msgError = error;
-        console.log(error);
+        console.log("error editCategoria ListaCategoriaComponent : " + error);
       });
   }
 

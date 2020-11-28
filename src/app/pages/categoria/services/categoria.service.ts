@@ -74,7 +74,7 @@ export class CategoriaService {
       // Erro ocorreu no lado do servidor
       errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
     }
-    console.log(errorMessage);
+    console.log("HandleError errorMessage: " + errorMessage);
     return throwError(errorMessage);
   };
 }
