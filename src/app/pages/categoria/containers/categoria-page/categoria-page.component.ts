@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CategoriaPageComponent implements OnInit {
 
   constructor() {
-     
+
   }
 
   ngOnInit(): void {

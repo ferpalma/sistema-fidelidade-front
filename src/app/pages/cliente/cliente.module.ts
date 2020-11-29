@@ -5,10 +5,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from '../../shared/shared.module';
 import { ClienteRoutingModule } from './cliente-routing.module';
-import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { ClientePageComponent } from './containers/cliente-page/cliente-page.component';
 import { ListaClienteComponent } from './components/lista-cliente/lista-cliente.component';
@@ -18,7 +18,9 @@ import { TextMaskModule } from 'angular2-text-mask';
 
 
 @NgModule({
-  declarations: [ClientePageComponent, ListaClienteComponent, CadastroClienteComponent],
+  declarations: [ClientePageComponent,
+    ListaClienteComponent,
+    CadastroClienteComponent],
   imports: [
     CommonModule,
     ClienteRoutingModule,
@@ -29,7 +31,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    TextMaskModule
+    TextMaskModule,
+    ReactiveFormsModule
   ]
 })
 export class ClienteModule { }
