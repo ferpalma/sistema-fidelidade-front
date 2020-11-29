@@ -37,6 +37,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/produto/produto.module').then(m => m.ProdutoModule)
   },
   {
+    path: 'pontuacao',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/pontuacao/pontuacao.module').then(m => m.PontuacaoModule)
+  },
+  {
     path: 'tables',
     pathMatch: 'full',
     canActivate: [AuthGuard],
