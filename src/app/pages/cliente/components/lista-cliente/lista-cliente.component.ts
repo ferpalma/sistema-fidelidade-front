@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-
+import { empty, Observable, of } from 'rxjs';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente';
-import { NgForm } from '@angular/forms';
-
-import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.component'
+import { catchError } from 'rxjs/operators';
+import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.component';
 
 
 
@@ -17,52 +16,66 @@ import { CadastroClienteComponent } from '../cadastro-cliente/cadastro-cliente.c
 })
 export class ListaClienteComponent implements OnInit {
 
-  cliente = {} as Cliente;
-  listaCliente: Cliente[];
+  public listaClientes$: Observable<Cliente[]>;
+  public msgError: string;
 
   ngOnInit(): void {
-    this.getListaCliente();
+    this.msgError = null;
+    this.getListaClientes();
   }
 
   constructor(public dialog: MatDialog, private clienteService: ClienteService) {}
 
 
-
-  openDialog() {
-    this.dialog.open(CadastroClienteComponent, {
-      width: '650px'
-    });
+  // Chama o serviço para obtém todas as clientes
+  private getListaClientes() {
+    this.listaClientes$ = this.clienteService.getListaClientes()
+      .pipe(
+        catchError(error => {
+          this.msgError = error;
+          console.log("getListaClientes ListaClienteComponent : " + error);
+          // tslint:disable-next-line: deprecation
+          return empty();
+        })
+      );
   }
 
-
-  // Chama o serviço para obter todos os clientes
-  getListaCliente() {
-    this.clienteService.getListaCliente().subscribe((listaCliente: Cliente[]) => {
-      this.listaCliente = listaCliente;
+  public openDialog() {
+    this.dialog.open(CadastroClienteComponent, {
+      width: '50%'
+    });
+    this.dialog.afterAllClosed.subscribe(() => {
+      this.getListaClientes();
     });
   }
 
   // deleta uma cliente
-  deleteCliente(cliente: Cliente) {
-    this.clienteService.deleteCliente(cliente).subscribe(() => {
-      this.getListaCliente();
+  public deleteCliente(cliente: Cliente) {
+    console.log(cliente);
+    this.clienteService.deleteCliente(cliente).subscribe(
+      (sucesso) => {
+        console.log(sucesso);
+        this.getListaClientes();
+      },
+      error => {
+        this.msgError = error;
+        console.log("error deleteCliente ListaClienteComponent : " + error);
+      });
+  }
+
+  public editCliente(cliente: Cliente): void {
+    this.dialog.open(CadastroClienteComponent, {
+      width: '50%',
+      data: cliente
     });
+    this.dialog.afterAllClosed.subscribe((sucesso) => {
+      console.log(sucesso);
+      this.getListaClientes();
+    },
+      error => {
+        this.msgError = error;
+        console.log("error editCliente ListaClienteComponent : " + error);
+      });
   }
 
-  // copia o clientero para ser editado.
-  // editCliente(cliente: Cliente) {
-  //   this.cliente = { ...cliente };
-  //   this.dialog.open(CadastroClienteComponent, {
-  //     data:{
-  //       nome: this.cliente.nome
-  //     }
-  //   });
-  // }
-
-  // limpa o formulario
-  cleanForm(form: NgForm) {
-    this.getListaCliente();
-    form.resetForm();
-    this.cliente = {} as Cliente;
-  }
 }

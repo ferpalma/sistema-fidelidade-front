@@ -18,14 +18,14 @@ export class ClienteService {
   // Headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
+  };
 
   // Obtem todos os clientes
-  getListaCliente(): Observable<Cliente[]> {
+  getListaClientes(): Observable<Cliente[]> {
     return this.httpClient.get<Cliente[]>(this.url + '/' + 'clientes')
       .pipe(
         retry(2),
-        catchError(this.handleError))
+        catchError(this.handleError));
   }
 
   // Obtem um cliente pelo id
@@ -34,34 +34,35 @@ export class ClienteService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // salva um cliente
   saveCliente(cliente: Cliente): Observable<Cliente> {
-    return this.httpClient.post<Cliente>(this.url + '/' + 'cliente' , cliente, this.httpOptions)
+    return this.httpClient.post<Cliente>(this.url + '/' + 'cliente' , cliente)
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // atualiza um cliente
   updateCliente(cliente: Cliente): Observable<Cliente> {
-    return this.httpClient.put<Cliente>(this.url + '/' + 'cliente' + '/' + cliente.idCliente, cliente, this.httpOptions)
+    return this.httpClient.put<Cliente>(this.url + '/' + 'cliente', cliente, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // deleta um cliente
   deleteCliente(cliente: Cliente) {
+    console.log(this.url + '/' + 'cliente' + '/' + cliente.idCliente);
     return this.httpClient.delete<Cliente>(this.url + '/' + 'cliente' + '/' + cliente.idCliente, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // Manipulação de erros
@@ -76,5 +77,5 @@ export class ClienteService {
     }
     console.log(errorMessage);
     return throwError(errorMessage);
-  };
+  }
 }
