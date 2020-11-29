@@ -17,14 +17,14 @@ export class CategoriaService {
   // Headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
+  };
 
   // Obtem todas as categorias
   getListaCategorias(): Observable<Categoria[]> {
     return this.httpClient.get<Categoria[]>(this.url + '/' + 'categorias')
       .pipe(
         retry(2),
-        catchError(this.handleError))
+        catchError(this.handleError));
   }
 
   // Obtem uma categoria pelo id
@@ -33,7 +33,7 @@ export class CategoriaService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // salva uma categoria
@@ -42,7 +42,7 @@ export class CategoriaService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // atualiza uma categoria
@@ -51,7 +51,7 @@ export class CategoriaService {
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // deleta uma categoria
@@ -61,7 +61,7 @@ export class CategoriaService {
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // Manipulação de erros
@@ -74,7 +74,7 @@ export class CategoriaService {
       // Erro ocorreu no lado do servidor
       errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
     }
-    console.log("HandleError errorMessage: " + errorMessage);
+    console.log('HandleError errorMessage: ' + errorMessage);
     return throwError(errorMessage);
-  };
+  }
 }

@@ -34,6 +34,7 @@ export class ListaCategoriaComponent implements OnInit {
         catchError(error => {
           this.msgError = error;
           console.log("getListaCategorias ListaCategoriaComponent : " + error);
+          // tslint:disable-next-line: deprecation
           return empty();
         })
       );
