@@ -9,6 +9,8 @@ import { ProdutoService } from '../../services/produto.service';
 import { Produto } from '../../models/produto';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
+import * as _ from 'lodash';
+
 @Component({
   selector: 'app-cadastro-produto',
   templateUrl: './cadastro-produto.component.html',
@@ -18,7 +20,9 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class CadastroProdutoComponent implements OnInit {
 
   public formulario: FormGroup;
+  public msgError: string;
   public categorias$: Observable<Categoria[]>;
+  public imageSrc: string;
 
   constructor(private produtoService: ProdutoService,
     private categoriaService: CategoriaService,
@@ -27,11 +31,12 @@ export class CadastroProdutoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Produto) { }
 
   ngOnInit() {
+    this.msgError = null;
     this.categorias$ = this.categoriaService.getListaCategorias();
-    console.log("CadastroProdutoComponent :" + this.data);
+    console.log("ngOnInit CadastroProdutoComponent :" + this.data);
     this.novoFormulario();
     if (this.data != null) {
-      this.formulario.get('idCategoria').setValue(this.data.idProduto);
+      this.formulario.get('idProduto').setValue(this.data.idProduto);
       this.formulario.get('nome').setValue(this.data.nome);
       this.formulario.get('status').setValue(this.data.status);
       this.formulario.get('pontosRecebidos').setValue(this.data.pontosRecebidos);
@@ -40,6 +45,20 @@ export class CadastroProdutoComponent implements OnInit {
       this.formulario.get('type').setValue(this.data.type);
       this.formulario.get('categoria').setValue(this.data.categoria);
     };
+  }
+
+  public onFileSelected(event: any) {
+    const reader = new FileReader();
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.imageSrc = reader.result as string;
+        this.formulario.patchValue({
+          imagem: reader.result
+        });
+      };
+    }
   }
 
   private novoFormulario(): void {
@@ -51,7 +70,7 @@ export class CadastroProdutoComponent implements OnInit {
       pontosRetirada: new FormControl(null, Validators.required),
       imagem: new FormControl(null),
       type: new FormControl(null),
-      
+
       categoria: this.formBuilder.group({
         idCategoria: new FormControl(null),
         nome: new FormControl(null, Validators.required),
@@ -62,23 +81,36 @@ export class CadastroProdutoComponent implements OnInit {
 
   // define se uma produto será criada ou atualizada
   saveProduto() {
-    if (this.formulario.get('idProduto') != null) {
-      console.log("updateProduto :" + this.formulario.value);
-      this.produtoService.updateProduto(this.formulario.value).subscribe(() => {
-        this.resetar();
-      });
+    if (this.formulario.get('idProduto').value != null) {
+      console.log("updateCategoria CadastroProdutoComponent: " + this.formulario.value);
+      this.produtoService.updateProduto(this.formulario.value).subscribe(
+        (sucesso) => {
+          console.log(sucesso);
+          this.dialogRef.close();
+        },
+        error => {
+          this.msgError = error;
+          console.log("error updateCategoria CadastroProdutoComponent: " + error);
+        });
     } else {
-      console.log("saveProduto :" + this.formulario.value);
-      this.produtoService.saveProduto(this.formulario.value).subscribe(() => {
-        this.resetar();
-      });
+      console.log("saveCategoria CadastroProdutoComponent: " + this.formulario.value);
+      this.produtoService.saveProduto(this.formulario.value).subscribe(
+        (sucesso) => {
+          console.log(sucesso);
+          this.dialogRef.close();
+        },
+        error => {
+          this.msgError = error;
+          console.log("error saveCategoria CadastroProdutoComponent: " + error);
+        });
     }
   }
 
   // resetar formulário
   public resetar(): void {
     this.formulario.reset();
-    this.dialogRef.close();
+    this.msgError = null;
+    this.imageSrc = null;
   }
 
   //valida o campo do formulário
@@ -97,6 +129,6 @@ export class CadastroProdutoComponent implements OnInit {
   public compararCategorias(obj1: any, obj2: any) {
     return obj1 && obj2 ? (obj1.nome === obj2.nome) : obj1 === obj2;
   }
-  
+
 }
 

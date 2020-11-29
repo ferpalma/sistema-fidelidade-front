@@ -40,7 +40,7 @@ export class CadastroCategoriaComponent implements OnInit {
 
   // define se uma categoria será criada ou atualizada
   public saveCategoria() {    
-    if (this.formulario.get('idCategoria') != null) {
+    if (this.formulario.get('idCategoria').value != null) {
       console.log("updateCategoria CadastroCategoriaComponent: " + this.formulario.value);
       this.categoriaService.updateCategoria(this.formulario.value).subscribe(
         (sucesso) => {
