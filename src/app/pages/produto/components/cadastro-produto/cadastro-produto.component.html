@@ -1,6 +1,9 @@
 <h3 mat-dialog-title class="mb-4">Cadastro de produto</h3>
 <div mat-dialog-content>
+
     <form id="add-form-Produto" (ngSubmit)="saveProduto()" [formGroup]="formulario" novalidate>
+
+        <mat-card class="fundo-lightcoral" *ngIf="msgError"><span>{{ msgError }}</span></mat-card>
 
         <div class="form-group" hidden>
             <label for="idProduto">idProduto</label>
@@ -20,30 +23,45 @@
             <label class="form-check-label" for="status">Ativo</label>
         </div>
 
-        <div class="form-group">
-            <label for="pontosRecebidos">Pontos Recebidos</label>
-            <input type="text" id="pontosRecebidos" formControlName="pontosRecebidos" class="form-control" [ngClass]="aplicaCssErro('pontosRecebidos')">
-            <div *ngIf="verificaValidTouched('pontosRecebidos')">
-                <span class="font-red">Pontos Recebidos é obrigatório</span>
+        <div class="form-group row">
+            <div class="col-sm">
+                <label for="pontosRecebidos">Pontos Recebidos</label>
+                <input type="text" id="pontosRecebidos" formControlName="pontosRecebidos" class="form-control" [ngClass]="aplicaCssErro('pontosRecebidos')">
+                <div *ngIf="verificaValidTouched('pontosRecebidos')">
+                    <span class="font-red">Pontos Recebidos é obrigatório</span>
+                </div>
+            </div>
+
+            <div class="col-sm">
+                <label for="pontosRetirada">Pontos Retirada</label>
+                <input type="text" id="pontosRetirada" formControlName="pontosRetirada" class="form-control" [ngClass]="aplicaCssErro('pontosRetirada')">
+                <div *ngIf="verificaValidTouched('pontosRetirada')">
+                    <span class="font-red">Pontos Retirada é obrigatório</span>
+                </div>
             </div>
         </div>
 
         <div class="form-group">
-            <label for="pontosRetirada">Pontos Retirada</label>
-            <input type="text" id="pontosRetirada" formControlName="pontosRetirada" class="form-control" [ngClass]="aplicaCssErro('pontosRetirada')">
-            <div *ngIf="verificaValidTouched('pontosRetirada')">
-                <span class="font-red">Pontos Retirada é obrigatório</span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-4" [ngClass]="aplicaCssErro('categoria')">
+            <div [ngClass]="aplicaCssErro('categoria')">
                 <label for="categoria" class="control-label">Categoria</label>
                 <select class="form-control" id="categoria" formControlName="categoria" [compareWith]="compararCategorias">
                 <option *ngFor="let categoria of categorias$ | async" [ngValue]="categoria">{{ categoria.nome }}</option>
               </select>
             </div>
+            <div *ngIf="verificaValidTouched('categoria')">
+                <span class="font-red">Categoria é obrigatório</span>
+            </div>
         </div>
+
+        <div class="form-group">
+            <label for="urlImage">Imagem</label>
+            <input type="file" id="urlImage" accept="image/x-png,image/jpeg" (change)="onFileSelected($event)" formControlName="urlImage" class="form-control">
+            <div *ngIf="verificaValidTouched('urlImage')">
+                <span class="font-red">A imagem é obrigatório</span>
+            </div>
+        </div>
+
+        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 30%; width: 30%">
 
         <div class="d-flex justify-content-between">
             <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="resetar()">
@@ -51,8 +69,6 @@
             <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;">
                 Salvar</button>
         </div>
-
-        <app-form-debug [form]="formulario"></app-form-debug>
 
     </form>
 </div>

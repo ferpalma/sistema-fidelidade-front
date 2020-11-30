@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -40,8 +41,9 @@ export class CadastroCategoriaComponent implements OnInit {
   }
 
   // define se uma categoria será criada ou atualizada
-  public saveCategoria() {
-    if (this.formulario.get('idCategoria') != null) {
+  public saveCategoria() {    
+    if (this.formulario.get('idCategoria').value != null) {
+
       console.log("updateCategoria CadastroCategoriaComponent: " + this.formulario.value);
       this.categoriaService.updateCategoria(this.formulario.value).subscribe(
         (sucesso) => {

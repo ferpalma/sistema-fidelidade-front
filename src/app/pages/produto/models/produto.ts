@@ -3,10 +3,9 @@ import { Categoria } from './../../categoria/models/categoria';
 export interface Produto {
   idProduto: number;
   nome: string;
-  status: boolean;
-  categoria: Categoria;
+  status: boolean;  
   pontosRecebidos: number;
   pontosRetirada: number;
-  imagem: any;
-  type: string;
+  urlImage: string;
+  categoria: Categoria;
 }
