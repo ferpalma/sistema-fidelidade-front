@@ -1,0 +1,1 @@
+export * from './cadastro-promocao/cadastro-promocao.component';

@@ -1,0 +1,1 @@
+export * from './promocao-page/promocao-page.component';
