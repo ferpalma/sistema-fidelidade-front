@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -15,7 +16,8 @@ export class CadastroCategoriaComponent implements OnInit {
   public formulario: FormGroup;
   public msgError: string;
 
-  constructor(private categoriaService: CategoriaService,
+  constructor(
+    private categoriaService: CategoriaService,
     public dialogRef: MatDialogRef<CadastroCategoriaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Categoria) { }
 
@@ -41,6 +43,7 @@ export class CadastroCategoriaComponent implements OnInit {
   // define se uma categoria será criada ou atualizada
   public saveCategoria() {    
     if (this.formulario.get('idCategoria').value != null) {
+
       console.log("updateCategoria CadastroCategoriaComponent: " + this.formulario.value);
       this.categoriaService.updateCategoria(this.formulario.value).subscribe(
         (sucesso) => {
@@ -70,12 +73,12 @@ export class CadastroCategoriaComponent implements OnInit {
     this.msgError = null;
   }
 
-  //valida o campo do formulário
+  // valida o campo do formulário
   public verificaValidTouched(campo: any) {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
-  //aplica css de alerta para campo inválido
+  // aplica css de alerta para campo inválido
   public aplicaCssErro(campo: any) {
     return {
       'border-red': this.verificaValidTouched(campo)

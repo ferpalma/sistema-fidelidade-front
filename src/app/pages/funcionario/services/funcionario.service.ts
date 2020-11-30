@@ -38,7 +38,7 @@ export class FuncionarioService {
 
   // salva um funcionario
   saveFuncionario(funcionario: Funcionario): Observable<Funcionario> {
-    return this.httpClient.post<Funcionario>(this.url + '/' + 'funcionario' , funcionario, this.httpOptions)
+    return this.httpClient.post<Funcionario>(this.url + '/' + 'funcionario' , funcionario)
       .pipe(
         retry(2),
         catchError(this.handleError)
@@ -47,7 +47,7 @@ export class FuncionarioService {
 
   // atualiza um funcionario
   updateFuncionario(funcionario: Funcionario): Observable<Funcionario> {
-    return this.httpClient.put<Funcionario>(this.url + '/' + 'funcionario' + '/' + funcionario.idFuncionario, funcionario, this.httpOptions)
+    return this.httpClient.put<Funcionario>(this.url + '/' + 'funcionario', funcionario, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -56,6 +56,7 @@ export class FuncionarioService {
 
   // deleta um funcionario
   deleteFuncionario(funcionario: Funcionario) {
+    console.log(this.url + '/' + 'funcionario' + '/' + funcionario.idFuncionario);
     return this.httpClient.delete<Funcionario>(this.url + '/' + 'funcionario' + '/' + funcionario.idFuncionario, this.httpOptions)
       .pipe(
         retry(1),
@@ -73,7 +74,7 @@ export class FuncionarioService {
       // Erro ocorreu no lado do servidor
       errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
     }
-    console.log(errorMessage);
+    console.log("HandleError errorMessage: " + errorMessage);
     return throwError(errorMessage);
   };
 }

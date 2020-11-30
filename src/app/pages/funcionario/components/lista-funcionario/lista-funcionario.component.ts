@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
+import { catchError } from 'rxjs/operators';
+import { empty, Observable, of } from 'rxjs';
 
 import { FuncionarioService } from '../../services/funcionario.service';
 import { Funcionario } from '../../models/funcionario';
 import { NgForm } from '@angular/forms';
 
 import { CadastroFuncionarioComponent } from '../cadastro-funcionario/cadastro-funcionario.component'
-import { EditarFuncionarioComponent } from '../editar-funcionario/editar-funcionario.component'
+// import { EditarFuncionarioComponent } from '../editar-funcionario/editar-funcionario.component'
 
 @Component({
   selector: 'app-lista-funcionario',
@@ -15,60 +17,63 @@ import { EditarFuncionarioComponent } from '../editar-funcionario/editar-funcion
 })
 export class ListaFuncionarioComponent implements OnInit {
 
-  funcionario = {} as Funcionario;
-  listaFuncionario: Funcionario[];
+  public listaFuncionarios$: Observable<Funcionario[]>;
+  public msgError: string;
 
   ngOnInit(): void {
+    this.msgError = null;
     this.getListaFuncionario();
   }
 
   constructor(public dialog: MatDialog, private funcionarioService: FuncionarioService) {}
 
 
-
-  openDialog() {
+  public openDialog() {
     this.dialog.open(CadastroFuncionarioComponent, {
-      width: '650px'
+      width: '50%'
     });
-  }
-
-
-  // Chama o serviço para obter todos os funcionarios
-  getListaFuncionario() {
-    this.funcionarioService.getListaFuncionario().subscribe((listaFuncionario: Funcionario[]) => {
-      this.listaFuncionario = listaFuncionario;
-    });
-  }
-
-  // deleta uma funcionario
-  deleteFuncionario(funcionario: Funcionario) {
-    this.funcionarioService.deleteFuncionario(funcionario).subscribe(() => {
+    this.dialog.afterAllClosed.subscribe(() => {
       this.getListaFuncionario();
     });
   }
 
-  // copia o funcionarioro para ser editado.
-  // editFuncionario(funcionario: Funcionario) {
-  //   this.funcionario = { ...funcionario };
-  //   this.dialog.open(CadastroFuncionarioComponent, {
-  //     data:{
-  //       nome: this.funcionario.nome
-  //     }
-  //   });
-  // }
-
-  editFuncionario(funcionario: Funcionario): void {
-    this.funcionario = { ...funcionario };
-    const dialogRef = this.dialog.open(EditarFuncionarioComponent, {
-      width: '650px',
-      data: {id: this.funcionario.idFuncionario, nome: this.funcionario.nome, status: this.funcionario.status, cpf: this.funcionario.cpf, email: this.funcionario.email}
-    });
+  // Chama o serviço para obtém todos os funcionarios
+  private getListaFuncionario() {
+    this.listaFuncionarios$ = this.funcionarioService.getListaFuncionario()
+      .pipe(
+        catchError(error => {
+          this.msgError = error;
+          console.log("getListaFuncionario ListaFuncionarioComponent : " + error);
+          return empty();
+        })
+      );
   }
 
-  // limpa o formulario
-  cleanForm(form: NgForm) {
-    this.getListaFuncionario();
-    form.resetForm();
-    this.funcionario = {} as Funcionario;
+  // deleta uma categoria
+  public deleteFuncionario(funcionario: Funcionario) {
+    this.funcionarioService.deleteFuncionario(funcionario).subscribe(
+      (sucesso) => {
+        console.log(sucesso);
+        this.getListaFuncionario();
+      },
+      error => {
+        this.msgError = error;
+        console.log("error deleteFuncionario ListaFuncionarioComponent : " + error);
+      });
+  }
+
+  public editFuncionario(funcionario: Funcionario): void {
+    this.dialog.open(CadastroFuncionarioComponent, {
+      width: '50%',
+      data: funcionario
+    });
+    this.dialog.afterAllClosed.subscribe((sucesso) => {
+      console.log(sucesso);
+      this.getListaFuncionario();
+    },
+      error => {
+        this.msgError = error;
+        console.log("error editFuncionario ListaFuncionarioComponent : " + error);
+      });
   }
 }

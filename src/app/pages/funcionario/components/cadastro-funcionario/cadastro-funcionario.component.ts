@@ -1,22 +1,9 @@
 import { Component, OnInit, Inject} from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { FuncionarioService } from '../../services/funcionario.service';
 import { Funcionario } from '../../models/funcionario';
-import { NgForm } from '@angular/forms';
-
-import { SuccessToastComponent } from '../success-toast/success-toast.component';
-
-enum ToastPositionTypes {
-  bottomCenter = 'toast-bottom-center',
-  bottomRight = 'toast-bottom-right',
-  bottomLeft = 'toast-bottom-left',
-  topCenter = 'toast-top-center',
-  topRight = 'toast-top-right',
-  topLeft = 'toast-top-left'
-}
-
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro-funcionario',
@@ -25,57 +12,81 @@ enum ToastPositionTypes {
 })
 export class CadastroFuncionarioComponent implements OnInit {
 
-  public toastrPositionTypes: typeof ToastPositionTypes = ToastPositionTypes;
-  public toastrPosition: string = this.toastrPositionTypes.topRight;
-  public timeOut = 3000;
-  public toastrLink: string = 'https://github.com/scttcper/ngx-toastr';
+  public formulario: FormGroup;
+  public msgError: string;
 
-  funcionario = {} as Funcionario;
-  listaFuncionario: Funcionario[];
-
-  constructor(private funcionarioService: FuncionarioService, public dialogRef: MatDialogRef<CadastroFuncionarioComponent>, @Inject(MAT_DIALOG_DATA) public data: Funcionario, private toastrService: ToastrService) {}
+  constructor(private funcionarioService: FuncionarioService, 
+    public dialogRef: MatDialogRef<CadastroFuncionarioComponent>, 
+    @Inject(MAT_DIALOG_DATA) public data: Funcionario) {}
   
   ngOnInit() {
-    this.getListaFuncionario();
+    this.msgError = null;
+    console.log("ngOnInit CadastroFuncionarioComponent :" + this.data);
+    this.novoFormulario();
+    if (this.data != null) {
+      this.formulario.get('idFuncionario').setValue(this.data.idFuncionario);
+      this.formulario.get('nome').setValue(this.data.nome);
+      this.formulario.get('cpf').setValue(this.data.cpf);
+      this.formulario.get('email').setValue(this.data.email);
+      this.formulario.get('senha').setValue(this.data.senha);
+      this.formulario.get('status').setValue(this.data.status);
+    }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  private novoFormulario(): void {
+    this.formulario = new FormGroup({
+      idFuncionario: new FormControl(null),
+      nome: new FormControl(null, Validators.required),
+      cpf: new FormControl(null, Validators.required),
+      email: new FormControl(null, Validators.required),
+      senha: new FormControl(null, Validators.required),
+      status: new FormControl(null, Validators.required)
+    });
   }
+
 
   // define se uma funcionario será criada ou atualizada
-  saveFuncionario(form: NgForm) {
-    this.funcionarioService.saveFuncionario(this.funcionario).subscribe(() => {
-      this.cleanForm(form);
-      this.showSuccess();
-    });
+  public saveFuncionario() {    
+    if (this.formulario.get('idFuncionario') != null) {
+      console.log("updateFuncionario CadastroFuncionarioComponent: " + this.formulario.value);
+      this.funcionarioService.updateFuncionario(this.formulario.value).subscribe(
+        (sucesso) => {
+          console.log(sucesso);
+          this.dialogRef.close();
+        },
+        error => {
+          this.msgError = error;
+          console.log("error updateFuncionario CadastroFuncionarioComponent: " + error);
+        });
+    } else {
+      console.log("saveFuncionario CadastroFuncionarioComponent: " + this.formulario.value);
+      this.funcionarioService.saveFuncionario(this.formulario.value).subscribe(
+        (sucesso) => {
+        console.log(sucesso);
+        this.dialogRef.close();
+      },
+      error => {
+        this.msgError = error;
+        console.log("error saveFuncionario CadastroFuncionarioComponent: " + error);
+      });
+    }
+  }
+  // resetar formulário
+  public resetar(): void {
+    this.formulario.reset();
+    this.msgError = null;
   }
 
-  // Chama o serviço para obter todas as funcionarios
-  getListaFuncionario() {
-    this.funcionarioService.getListaFuncionario().subscribe((listaFuncionario: Funcionario[]) => {
-      this.listaFuncionario = listaFuncionario;
-    });
+  //valida o campo do formulário
+  public verificaValidTouched(campo: any) {
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
-  // limpa o formulario
-  cleanForm(form: NgForm) {
-    this.getListaFuncionario();
-    form.resetForm();
-    this.funcionario = {} as Funcionario;
-  }
-
-  public showSuccess(): void {
-    this.toastrService.show(
-      null,
-      null,
-      {
-        positionClass: this.toastrPosition,
-        toastComponent: SuccessToastComponent,
-        timeOut: this.timeOut,
-        tapToDismiss: false
-      }
-    );
+  //aplica css de alerta para campo inválido
+  public aplicaCssErro(campo: any) {
+    return {
+      'border-red': this.verificaValidTouched(campo)
+    };
   }
 
 }

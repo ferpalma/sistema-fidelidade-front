@@ -7,7 +7,7 @@ import { CategoriaPageComponent } from './containers';
 import { CategoriaRoutingModule } from './categoria-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,9 +18,8 @@ import { CadastroCategoriaComponent } from './components/cadastro-categoria/cada
 
 
 @NgModule({
-  declarations: [
-    CategoriaPageComponent,
-    ListaCategoriaComponent, 
+  declarations: [CategoriaPageComponent,
+    ListaCategoriaComponent,
     CadastroCategoriaComponent],
   imports: [
     CommonModule,
@@ -31,7 +30,7 @@ import { CadastroCategoriaComponent } from './components/cadastro-categoria/cada
     MatFormFieldModule,
     SharedModule,
     FormsModule,
-    MatButtonModule,    
+    MatButtonModule,
     ReactiveFormsModule,
   ]
 })

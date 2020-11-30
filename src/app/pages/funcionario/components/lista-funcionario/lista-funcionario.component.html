@@ -1,11 +1,12 @@
 <mat-card class="typography-content__item-wrapper">
     <mat-card-title class="d-flex justify-content-between">
         <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
-        <p>Categorias</p>
+        <p>Funcionarios</p>
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
             add
             </span>Adicionar funcionario</button>
     </mat-card-title>
+    <mat-card class="fundo-lightcoral" *ngIf="msgError"><span>{{ msgError }}</span></mat-card>
     <table class="table table-hover table-borderless table-striped">
         <thead>
             <tr>
@@ -20,7 +21,7 @@
         </thead>
         <tbody>
             <!-- TODO: quem sabe adicionar um paginator -->
-            <tr *ngFor="let funcionario of listaFuncionario">
+            <tr *ngFor="let funcionario of listaFuncionarios$ | async">
                 <td>{{funcionario.idFuncionario}}</td>
                 <td *ngIf="funcionario.nome">{{funcionario.nome}}</td>
                 <td>{{funcionario.status ? 'Ativo':'Inativo'}}</td>
