@@ -12,10 +12,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { ListaClientesPontuacaoComponent } from './components/lista-clientes-pontuacao/lista-clientes-pontuacao.component';
 
 
 @NgModule({
-  declarations: [PontuacaoPageComponent, CadastroPontuacaoComponent],
+  declarations: [PontuacaoPageComponent, CadastroPontuacaoComponent, ListaClientesPontuacaoComponent],
   imports: [
     CommonModule,
     PontuacaoRoutingModule,

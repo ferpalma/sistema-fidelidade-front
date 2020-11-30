@@ -42,6 +42,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/pontuacao/pontuacao.module').then(m => m.PontuacaoModule)
   },
+  // {
+  //   path: 'promocao',
+  //   pathMatch: 'full',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: () => import('./pages/promocao/promocao.module').then(m => m.PromocaoModule)
+  // },
+  // {
+  //   path: 'resgate',
+  //   pathMatch: 'full',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: () => import('./pages/resgate/resgate.module').then(m => m.ResgateModule)
+  // },
   {
     path: 'tables',
     pathMatch: 'full',
