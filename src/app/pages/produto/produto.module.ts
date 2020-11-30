@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,13 +15,21 @@ import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-import {MatButtonModule} from '@angular/material/button';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+import { environment } from '../../../environments/environment.prod';
 
 
 @NgModule({
-  declarations: [ProdutoPageComponent, CadastroProdutoComponent, ListaProdutoComponent],
+  declarations: [
+    ProdutoPageComponent, 
+    CadastroProdutoComponent, 
+    ListaProdutoComponent],
   imports: [
     CommonModule,
     ProdutoRoutingModule,
@@ -33,7 +42,12 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule, 
+    MatDialogModule,
+    AngularFireStorageModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),    
+  ],
+  providers: [],
 })
 export class ProdutoModule { }

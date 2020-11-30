@@ -54,9 +54,9 @@
         </div>
 
         <div class="form-group">
-            <label for="imagem">Imagem</label>
-            <input type="file" id="imagem" accept="image/x-png,image/jpeg" (change)="onFileSelected($event)" formControlName="imagem" class="form-control">
-            <div *ngIf="verificaValidTouched('imagem')">
+            <label for="urlImage">Imagem</label>
+            <input type="file" id="urlImage" accept="image/x-png,image/jpeg" (change)="onFileSelected($event)" formControlName="urlImage" class="form-control">
+            <div *ngIf="verificaValidTouched('urlImage')">
                 <span class="font-red">A imagem é obrigatório</span>
             </div>
         </div>

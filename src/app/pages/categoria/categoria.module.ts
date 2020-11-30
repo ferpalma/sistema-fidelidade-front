@@ -18,7 +18,8 @@ import { CadastroCategoriaComponent } from './components/cadastro-categoria/cada
 
 
 @NgModule({
-  declarations: [CategoriaPageComponent,
+  declarations: [
+    CategoriaPageComponent,
     ListaCategoriaComponent, 
     CadastroCategoriaComponent],
   imports: [

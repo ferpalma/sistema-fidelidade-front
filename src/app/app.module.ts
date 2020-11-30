@@ -12,7 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthModule } from './pages/auth/auth.module';
-import { CategoriaPageComponent } from './pages/categoria/containers/categoria-page/categoria-page.component';
 
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
@@ -58,10 +57,6 @@ import {OverlayModule} from '@angular/cdk/overlay';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-
-
-
-
 
 @NgModule({
   declarations: [

@@ -6,7 +6,6 @@ export interface Produto {
   status: boolean;  
   pontosRecebidos: number;
   pontosRetirada: number;
-  imagem: File;
-  type: string;
+  urlImage: string;
   categoria: Categoria;
 }

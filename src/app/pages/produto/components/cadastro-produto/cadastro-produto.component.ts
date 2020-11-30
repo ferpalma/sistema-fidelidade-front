@@ -10,6 +10,8 @@ import { Produto } from '../../models/produto';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 import * as _ from 'lodash';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cadastro-produto',
@@ -20,18 +22,23 @@ import * as _ from 'lodash';
 export class CadastroProdutoComponent implements OnInit {
 
   public formulario: FormGroup;
-  public msgError: string;
+  public msgError: String;
   public categorias$: Observable<Categoria[]>;
-  public imageSrc: string;
+  public imageSrc: String;
 
-  constructor(private produtoService: ProdutoService,
-    private categoriaService: CategoriaService,
-    private formBuilder: FormBuilder,
+  public fb: any;
+  public downloadURL: Observable<String>;
+
+  constructor(public produtoService: ProdutoService,
+    public categoriaService: CategoriaService,
+    public formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<CadastroProdutoComponent>,
+    public storage: AngularFireStorage,
     @Inject(MAT_DIALOG_DATA) public data: Produto) { }
 
   ngOnInit() {
-    this.msgError = null;
+    this.msgError = "";
+    this.imageSrc = "";
     this.categorias$ = this.categoriaService.getListaCategorias();
     console.log("ngOnInit CadastroProdutoComponent :" + this.data);
     this.novoFormulario();
@@ -41,12 +48,13 @@ export class CadastroProdutoComponent implements OnInit {
       this.formulario.get('status').setValue(this.data.status);
       this.formulario.get('pontosRecebidos').setValue(this.data.pontosRecebidos);
       this.formulario.get('pontosRetirada').setValue(this.data.pontosRetirada);
-      this.formulario.get('imagem').setValue(this.data.imagem);
-      this.formulario.get('type').setValue(this.data.type);
+      this.formulario.get('urlImage').setValue(this.data.urlImage);
+      this.imageSrc = this.data.urlImage;
       this.formulario.get('categoria').setValue(this.data.categoria);
     };
   }
 
+  //método para carregar imagem escolhida ma página
   public onFileSelected(event: any) {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
@@ -54,11 +62,38 @@ export class CadastroProdutoComponent implements OnInit {
       reader.readAsDataURL(file);
       reader.onload = () => {
         this.imageSrc = reader.result as string;
-        this.formulario.patchValue({
-          imagem: reader.result
-        });
       };
     }
+    this.upload(event);
+  }
+
+  //método para enviar imagem para o Firebase Storage
+  private upload(event: any) {
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `imagens-produtos/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`imagens-produtos/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log("finalize upload url -> " + this.fb);
+            this.formulario.get('urlImage').setValue(url);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log("subscribe upload url -> " + url);
+          this.formulario.get('urlImage').setValue(url);
+        }
+      });
   }
 
   private novoFormulario(): void {
@@ -68,8 +103,7 @@ export class CadastroProdutoComponent implements OnInit {
       status: new FormControl(null, Validators.required),
       pontosRecebidos: new FormControl(null, Validators.required),
       pontosRetirada: new FormControl(null, Validators.required),
-      imagem: new FormControl(null),
-      type: new FormControl(null),
+      urlImage: new FormControl(null),
 
       categoria: this.formBuilder.group({
         idCategoria: new FormControl(null),
