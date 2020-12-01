@@ -1,47 +1,47 @@
 <mat-card class="typography-content__item-wrapper">
-  <mat-card-title class="d-flex justify-content-between">
-      <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
-      <p>Clientes</p>
-      <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
+    <mat-card-title class="d-flex justify-content-between">
+        <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
+        <p>Clientes</p>
+        <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
           add
           </span>Adicionar cliente</button>
-  </mat-card-title>
-  <mat-card class="fundo-lightcoral" *ngIf="msgError"><span>{{ msgError }}</span></mat-card>
-  <table class="table table-hover table-borderless table-striped">
-      <thead>
-          <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Nome</th>
-              <th scope="col">Status</th>
-              <th scope="col">CPF</th>
-              <th scope="col">Email</th>
-              <th scope="col">Telefone</th>
-              <th scope="col">Pontos</th>
-              <th scope="col"></th>
-          </tr>
-      </thead>
-      <tbody>
-          <!-- TODO: quem sabe adicionar um paginator -->
-          <tr *ngFor="let cliente of listaClientes$ | async">
-              <td>{{cliente.idCliente}}</td>
-              <td *ngIf="cliente.nome">{{cliente.nome}}</td>
-              <td>{{cliente.status ? 'Ativo':'Inativo'}}</td>
-              <td>{{cliente.cpf}}</td>
-              <td>{{cliente.email}}</td>
-              <td>{{cliente.telefone}}</td>
-              <td>{{cliente.pontos}}</td>
-              <td class="text-right">
-              <button mat-raised-button color="accent" class="mr-3" (click)="editCliente(cliente)">
+    </mat-card-title>
+    <mat-card class="fundo-lightcoral" *ngIf="msgError"><span>{{ msgError }}</span></mat-card>
+    <table class="table table-hover table-borderless table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Status</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Pontos</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: quem sabe adicionar um paginator -->
+            <tr *ngFor="let cliente of listaClientes$ | async">
+                <td>{{cliente.idUsuario}}</td>
+                <td>{{cliente.nome}}</td>
+                <td>{{cliente.status ? 'Ativo':'Inativo'}}</td>
+                <td>{{cliente.cpf}}</td>
+                <td>{{cliente.email}}</td>
+                <td>{{cliente.telefone}}</td>
+                <td>{{cliente.pontos}}</td>
+                <td class="text-right">
+                    <button mat-raised-button color="accent" class="mr-3" (click)="editCliente(cliente)">
                 <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
                 edit
                 </span>Editar</button>
-                  <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deleteCliente(cliente)">
+                    <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deleteCliente(cliente)">
                       <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
                       delete
                       </span>Apagar</button>
-              </td>
+                </td>
 
-          </tr>
-      </tbody>
-  </table>
+            </tr>
+        </tbody>
+    </table>
 </mat-card>

@@ -36,35 +36,38 @@ export class CadastroCategoriaComponent implements OnInit {
     this.formulario = new FormGroup({
       idCategoria: new FormControl(null),
       nome: new FormControl(null, Validators.required),
-      status: new FormControl(null, Validators.required)
+      status: new FormControl(true)
     });
   }
 
   // define se uma categoria será criada ou atualizada
-  public saveCategoria() {    
-    if (this.formulario.get('idCategoria').value != null) {
-
-      console.log("updateCategoria CadastroCategoriaComponent: " + this.formulario.value);
-      this.categoriaService.updateCategoria(this.formulario.value).subscribe(
-        (sucesso) => {
-          console.log(sucesso);
-          this.dialogRef.close();
-        },
-        error => {
-          this.msgError = error;
-          console.log("error updateCategoria CadastroCategoriaComponent: " + error);
-        });
+  public saveCategoria() {
+    if (this.formulario.valid) {
+      if (this.formulario.get('idCategoria').value != null) {
+        console.log("updateCategoria CadastroCategoriaComponent: " + this.formulario.value);
+        this.categoriaService.updateCategoria(this.formulario.value).subscribe(
+          (sucesso) => {
+            console.log(sucesso);
+            this.dialogRef.close();
+          },
+          error => {
+            this.msgError = error;
+            console.log("error updateCategoria CadastroCategoriaComponent: " + error);
+          });
+      } else {
+        console.log("saveCategoria CadastroCategoriaComponent: " + this.formulario.value);
+        this.categoriaService.saveCategoria(this.formulario.value).subscribe(
+          (sucesso) => {
+            console.log(sucesso);
+            this.dialogRef.close();
+          },
+          error => {
+            this.msgError = error;
+            console.log("error saveCategoria CadastroCategoriaComponent: " + error);
+          });
+      }
     } else {
-      console.log("saveCategoria CadastroCategoriaComponent: " + this.formulario.value);
-      this.categoriaService.saveCategoria(this.formulario.value).subscribe(
-        (sucesso) => {
-        console.log(sucesso);
-        this.dialogRef.close();
-      },
-      error => {
-        this.msgError = error;
-        console.log("error saveCategoria CadastroCategoriaComponent: " + error);
-      });
+      this.msgError = "O formulário não está válido!";
     }
   }
   // resetar formulário

@@ -57,8 +57,8 @@ export class ClienteService {
 
   // deleta um cliente
   deleteCliente(cliente: Cliente) {
-    console.log(this.url + '/' + 'cliente' + '/' + cliente.idCliente);
-    return this.httpClient.delete<Cliente>(this.url + '/' + 'cliente' + '/' + cliente.idCliente, this.httpOptions)
+    console.log(this.url + '/' + 'cliente' + '/' + cliente.idUsuario);
+    return this.httpClient.delete<Cliente>(this.url + '/' + 'cliente' + '/' + cliente.idUsuario, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)

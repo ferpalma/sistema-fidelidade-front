@@ -24,9 +24,10 @@ export class CadastroProdutoComponent implements OnInit {
   public formulario: FormGroup;
   public msgError: String;
   public categorias$: Observable<Categoria[]>;
+
   public imageSrc: String;
 
-  public fb: any;
+  public firebaseURL: any;
   public downloadURL: Observable<String>;
 
   constructor(public produtoService: ProdutoService,
@@ -73,7 +74,7 @@ export class CadastroProdutoComponent implements OnInit {
     const file = event.target.files[0];
     const filePath = `imagens-produtos/${n}`;
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`imagens-produtos/${n}`, file);
+    const task = this.storage.upload(filePath, file);
     task
       .snapshotChanges()
       .pipe(
@@ -81,9 +82,9 @@ export class CadastroProdutoComponent implements OnInit {
           this.downloadURL = fileRef.getDownloadURL();
           this.downloadURL.subscribe(url => {
             if (url) {
-              this.fb = url;
+              this.firebaseURL = url;
             }
-            console.log("finalize upload url -> " + this.fb);
+            console.log("finalize upload url -> " + this.firebaseURL);
             this.formulario.get('urlImage').setValue(url);
           });
         })
@@ -100,7 +101,7 @@ export class CadastroProdutoComponent implements OnInit {
     this.formulario = new FormGroup({
       idProduto: new FormControl(null),
       nome: new FormControl(null, Validators.required),
-      status: new FormControl(null, Validators.required),
+      status: new FormControl(true),
       pontosRecebidos: new FormControl(null, Validators.required),
       pontosRetirada: new FormControl(null, Validators.required),
       urlImage: new FormControl(null),
@@ -108,35 +109,39 @@ export class CadastroProdutoComponent implements OnInit {
       categoria: this.formBuilder.group({
         idCategoria: new FormControl(null),
         nome: new FormControl(null, Validators.required),
-        status: new FormControl(null, Validators.required)
+        status: new FormControl(null)
       })
     });
   }
 
   // define se uma produto será criada ou atualizada
   saveProduto() {
-    if (this.formulario.get('idProduto').value != null) {
-      console.log("updateCategoria CadastroProdutoComponent: " + this.formulario.value);
-      this.produtoService.updateProduto(this.formulario.value).subscribe(
-        (sucesso) => {
-          console.log(sucesso);
-          this.dialogRef.close();
-        },
-        error => {
-          this.msgError = error;
-          console.log("error updateCategoria CadastroProdutoComponent: " + error);
-        });
+    if (this.formulario.valid) {
+      if (this.formulario.get('idProduto').value != null) {
+        console.log("updateCategoria CadastroProdutoComponent: " + this.formulario.value);
+        this.produtoService.updateProduto(this.formulario.value).subscribe(
+          (sucesso) => {
+            console.log(sucesso);
+            this.dialogRef.close();
+          },
+          error => {
+            this.msgError = error;
+            console.log("error updateCategoria CadastroProdutoComponent: " + error);
+          });
+      } else {
+        console.log("saveCategoria CadastroProdutoComponent: " + this.formulario.value);
+        this.produtoService.saveProduto(this.formulario.value).subscribe(
+          (sucesso) => {
+            console.log(sucesso);
+            this.dialogRef.close();
+          },
+          error => {
+            this.msgError = error;
+            console.log("error saveCategoria CadastroProdutoComponent: " + error);
+          });
+      }
     } else {
-      console.log("saveCategoria CadastroProdutoComponent: " + this.formulario.value);
-      this.produtoService.saveProduto(this.formulario.value).subscribe(
-        (sucesso) => {
-          console.log(sucesso);
-          this.dialogRef.close();
-        },
-        error => {
-          this.msgError = error;
-          console.log("error saveCategoria CadastroProdutoComponent: " + error);
-        });
+      this.msgError = "O formulário não está válido!";
     }
   }
 
