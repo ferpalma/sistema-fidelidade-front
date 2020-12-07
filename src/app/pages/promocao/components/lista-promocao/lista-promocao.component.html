@@ -1,0 +1,26 @@
+<mat-card class="typography-content__item-wrapper">
+  <mat-card-title class="d-flex justify-content-between">
+      <p>Promoções</p>
+      <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
+          add
+          </span>Adicionar promoção</button>
+  </mat-card-title>
+</mat-card>
+<div *ngFor="let prom of listaPromocoes$ | async">
+  <mat-card class="typography-content__item-wrapper">
+      <mat-card-title class="d-flex justify-content-between">
+          <p>{{prom.idPromocao}} - {{prom.nome}} - {{prom.status ? 'Ativo' : 'Inativo'}}</p>
+          <div>
+              <button mat-raised-button color="accent" class="mr-3" (click)="editPromocao(prom)">
+              <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
+              edit
+              </span>Editar</button>
+              <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deletePromocao(prom)">
+              <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
+              delete
+              </span>Apagar</button>
+          </div>
+      </mat-card-title>
+      <img mat-card-image src="{{prom.urlImage}}" class="imagem ">
+  </mat-card>
+</div>

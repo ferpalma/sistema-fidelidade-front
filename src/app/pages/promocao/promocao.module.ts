@@ -12,11 +12,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { ListaPromocaoComponent } from './components/lista-promocao/lista-promocao.component';
 
 
 
 @NgModule({
-  declarations: [PromocaoPageComponent, CadastroPromocaoComponent],
+  declarations: [PromocaoPageComponent, CadastroPromocaoComponent, ListaPromocaoComponent],
   imports: [
     CommonModule,
     PromocaoRoutingModule,

@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Produto } from '../models/produto';
+import { Promocao } from '../models/promocao';
 @Injectable({
   providedIn: 'root'
 })
-export class ProdutoService {
+export class PromocaoService {
 
   url = 'http://localhost:8080/fidelidade'; // api rest fake
 
@@ -15,70 +15,70 @@ export class ProdutoService {
   // Headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
-  // Obtem todos os produtos
-  getListaProdutos(): Observable<Produto[]> {
-    return this.httpClient.get<Produto[]>(this.url + '/' + 'produtos')
+  };
+  // Obtem todos as promocoes
+  getListaPromocoes(): Observable<Promocao[]> {
+    return this.httpClient.get<Promocao[]>(this.url + '/' + 'promocoes')
       .pipe(
         retry(2),
         catchError(this.handleError));
   }
 
-    // Obtem todos os produtos ativos
-    getListaProdutosAtivos(): Observable<Produto[]> {
-      return this.httpClient.get<Produto[]>(this.url + '/' + 'produtos/ativos')
+    // Obtem todos as promocoes ativos
+    getListaPromocoesAtivos(): Observable<Promocao[]> {
+      return this.httpClient.get<Promocao[]>(this.url + '/' + 'promocoes/ativos')
         .pipe(
           retry(2),
-          catchError(this.handleError));
+          catchError(this.handleError))
     }
 
-  // Obtem um produto pelo id
-  getProdutoById(id: number): Observable<Produto> {
-    return this.httpClient.get<Produto>(this.url + '/' + 'produto' + '/' + id)
+  // Obtem um promocao pelo id
+  getPromocaoById(id: number): Observable<Promocao> {
+    return this.httpClient.get<Promocao>(this.url + '/' + 'promocao' + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
   }
 
-    // Obtem um produto pelo nome
-    getProdutoByNome(nome: string): Observable<Produto> {
-      return this.httpClient.get<Produto>(this.url + '/' + 'produto/nome/' + nome)
+    // Obtem um promocao pelo nome
+    getPromocaoByNome(nome: string): Observable<Promocao> {
+      return this.httpClient.get<Promocao>(this.url + '/' + 'promocao/nome/' + nome)
         .pipe(
           retry(2),
           catchError(this.handleError)
         );
     }
 
-  // salva um produto
-  saveProduto(produto: Produto): Observable<Produto> {
-    return this.httpClient.post<Produto>(this.url + '/' + 'produto', produto, this.httpOptions)
+  // salva um promocao
+  savePromocao(promocao: Promocao): Observable<Promocao> {
+    return this.httpClient.post<Promocao>(this.url + '/' + 'promocao', promocao, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
   }
 
-  // atualiza um produto
-  updateProduto(produto: Produto): Observable<Produto> {
-    return this.httpClient.put<Produto>(this.url + '/' +  'produto',  produto, this.httpOptions)
+  // atualiza um promocao
+  updatePromocao(promocao: Promocao): Observable<Promocao> {
+    return this.httpClient.put<Promocao>(this.url + '/' +  'promocao',  promocao, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
 
-  // deleta um produto
-  deleteProduto(produto: Produto) {
-    return this.httpClient.delete<Produto>(this.url + '/' +  'produto' + '/' + produto.idProduto, this.httpOptions)
+  // deleta um promocao
+  deletePromocao(promocao: Promocao) {
+    return this.httpClient.delete<Promocao>(this.url + '/' +  'promocao' + '/' + promocao.idPromocao, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
 
-  updateImagem(uploadImageData: any): Observable<Produto> {
-    return this.httpClient.post<Produto>(this.url + '/produto/upload-imagem', uploadImageData, this.httpOptions)
+  updateImagem(uploadImageData: any): Observable<Promocao> {
+    return this.httpClient.post<Promocao>(this.url + '/promocao/upload-imagem', uploadImageData, this.httpOptions)
       .pipe(
         retry(2),
         catchError(this.handleError)
