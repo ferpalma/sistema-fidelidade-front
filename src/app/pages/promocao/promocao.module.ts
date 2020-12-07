@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { PromocaoRoutingModule } from './promocao-routing.module';
 import { PromocaoPageComponent } from './containers/promocao-page/promocao-page.component';
 import { CadastroPromocaoComponent } from './components/cadastro-promocao/cadastro-promocao.component';
@@ -38,7 +38,8 @@ import { environment } from '../../../environments/environment.prod';
     MatIconModule,
     AngularFireStorageModule,
     AngularFireModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    MatDialogModule
   ]
 })
 export class PromocaoModule { }

@@ -42,10 +42,10 @@ export class CadastroPromocaoComponent implements OnInit {
       this.formulario.get('status').setValue(this.data.status);
       this.formulario.get('urlImage').setValue(this.data.urlImage);
       this.imageSrc = this.data.urlImage;
-    };
+    }
   }
 
-  //método para carregar imagem escolhida ma página
+  // método para carregar imagem escolhida ma página
   public onFileSelected(event: any) {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
@@ -58,7 +58,7 @@ export class CadastroPromocaoComponent implements OnInit {
     this.upload(event);
   }
 
-  //método para enviar imagem para o Firebase Storage
+  // método para enviar imagem para o Firebase Storage
   private upload(event: any) {
     const n = Date.now();
     const file = event.target.files[0];
@@ -134,12 +134,12 @@ export class CadastroPromocaoComponent implements OnInit {
     this.imageSrc = null;
   }
 
-  //valida o campo do formulário
+  // valida o campo do formulário
   public verificaValidTouched(campo: any) {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
-  //aplica css de alerta para campo inválido
+  // aplica css de alerta para campo inválido
   public aplicaCssErro(campo: any) {
     return {
       'border-red': this.verificaValidTouched(campo)

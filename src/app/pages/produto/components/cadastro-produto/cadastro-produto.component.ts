@@ -55,7 +55,7 @@ export class CadastroProdutoComponent implements OnInit {
     };
   }
 
-  //método para carregar imagem escolhida ma página
+  // método para carregar imagem escolhida ma página
   public onFileSelected(event: any) {
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
@@ -68,7 +68,7 @@ export class CadastroProdutoComponent implements OnInit {
     this.upload(event);
   }
 
-  //método para enviar imagem para o Firebase Storage
+  // método para enviar imagem para o Firebase Storage
   private upload(event: any) {
     var n = Date.now();
     const file = event.target.files[0];
@@ -152,19 +152,19 @@ export class CadastroProdutoComponent implements OnInit {
     this.imageSrc = null;
   }
 
-  //valida o campo do formulário
+  // valida o campo do formulário
   public verificaValidTouched(campo: any) {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
-  //aplica css de alerta para campo inválido
+  // aplica css de alerta para campo inválido
   public aplicaCssErro(campo: any) {
     return {
       'border-red': this.verificaValidTouched(campo)
     };
   }
 
-  //compara categorias
+  // compara categorias
   public compararCategorias(obj1: any, obj2: any) {
     return obj1 && obj2 ? (obj1.nome === obj2.nome) : obj1 === obj2;
   }
