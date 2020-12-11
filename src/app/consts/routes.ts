@@ -9,9 +9,12 @@ export enum routes {
   PONTUACAO = '/pontuacao',
   RESGATE = '/resgate',
   TABLES = '/tables',
+  HOMECLIENTE = '/homecliente',
+  HOMEFUNCIONARIO = '/homefuncionario',
   NOTIFICATION = '/notification',
   UI_ELEMENTS_ICONS = '/ui/icons',
   UI_ELEMENTS_CHARTS = '/ui/charts',
   UI_ELEMENTS_MAP = '/ui/map',
-  LOGIN = '/login'
+  LOGIN = '/login',
+  SOBRE = '/sobre'
 }
