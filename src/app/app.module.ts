@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { HomeFuncionarioModule } from './pages/home-funcionario/home-funcionario.module';
 import { HomeClienteModule } from './pages/home-cliente/home-cliente.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AuthModule } from './pages/auth/auth.module';
@@ -69,6 +70,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     SharedModule,
     HomeClienteModule,
+    HomeFuncionarioModule,
     AuthModule,
     DashboardModule,
     BrowserAnimationsModule,

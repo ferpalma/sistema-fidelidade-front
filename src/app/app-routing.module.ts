@@ -1,3 +1,4 @@
+import { HomeFuncionarioPageComponent } from './pages/home-funcionario/containers/home-funcionario-page/home-funcionario-page.component';
 import { HomeClientePageComponent } from './pages/home-cliente/containers/home-cliente-page/home-cliente-page.component';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,12 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
     component: HomeClientePageComponent
+  },
+  {
+    path: 'homefuncionario',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    component: HomeFuncionarioPageComponent
   },
   {
     path: 'funcionario',
