@@ -17,7 +17,7 @@ export class FuncionarioService {
   // Headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
+  };
 
   // Obtem todos os funcionarios
   getListaFuncionario(): Observable<Funcionario[]> {
@@ -33,7 +33,7 @@ export class FuncionarioService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // salva um funcionario
@@ -42,7 +42,7 @@ export class FuncionarioService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // atualiza um funcionario
@@ -51,7 +51,7 @@ export class FuncionarioService {
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // deleta um funcionario
@@ -61,7 +61,7 @@ export class FuncionarioService {
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // Manipulação de erros
@@ -76,5 +76,5 @@ export class FuncionarioService {
     }
     console.log("HandleError errorMessage: " + errorMessage);
     return throwError(errorMessage);
-  };
+  }
 }

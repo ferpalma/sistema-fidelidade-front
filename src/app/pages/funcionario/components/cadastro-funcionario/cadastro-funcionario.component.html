@@ -31,7 +31,7 @@
                 <span class="font-red">E-mail é obrigatório</span>
             </div>
         </div>
-        
+
         <div class="form-group">
             <label for="senha">Senha</label>
             <input type="text" id="senha" formControlName="senha" class="form-control" placeholder="Digite a senha" [ngClass]="aplicaCssErro('senha')">
@@ -39,7 +39,7 @@
                 <span class="font-red">Senha é obrigatório</span>
             </div>
         </div>
-        
+
         <div class="form-group form-check">
             <input type="checkbox" id="status" formControlName="status" class="form-check-input" checked>
             <label class="form-check-label" for="status">Ativo</label>
@@ -52,4 +52,5 @@
                 Salvar</button>
         </div>
     </form>
+    <app-form-debug [form]="formulario"></app-form-debug>
 </div>

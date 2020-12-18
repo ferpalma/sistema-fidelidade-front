@@ -3,7 +3,7 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { FuncionarioService } from '../../services/funcionario.service';
 import { Funcionario } from '../../models/funcionario';
-import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastro-funcionario',
@@ -15,11 +15,12 @@ export class CadastroFuncionarioComponent implements OnInit {
   public formulario: FormGroup;
   public msgError: string;
 
-  constructor(private funcionarioService: FuncionarioService, 
-    public dialogRef: MatDialogRef<CadastroFuncionarioComponent>, 
+  constructor(
+    private funcionarioService: FuncionarioService,
+    public dialogRef: MatDialogRef<CadastroFuncionarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Funcionario) {}
-  
-  ngOnInit() {
+
+  public ngOnInit() {
     this.msgError = null;
     console.log("ngOnInit CadastroFuncionarioComponent :" + this.data);
     this.novoFormulario();
@@ -46,43 +47,46 @@ export class CadastroFuncionarioComponent implements OnInit {
 
 
   // define se uma funcionario será criada ou atualizada
-  public saveFuncionario() {    
-    if (this.formulario.get('idFuncionario') != null) {
-      console.log("updateFuncionario CadastroFuncionarioComponent: " + this.formulario.value);
-      this.funcionarioService.updateFuncionario(this.formulario.value).subscribe(
-        (sucesso) => {
-          console.log(sucesso);
-          this.dialogRef.close();
-        },
-        error => {
-          this.msgError = error;
-          console.log("error updateFuncionario CadastroFuncionarioComponent: " + error);
-        });
+  public saveFuncionario() {
+    if (this.formulario.valid) {
+      if (this.formulario.get('idFuncionario').value != null) {
+        console.log("updateFuncionario CadastroFuncionarioComponent: " + this.formulario.value);
+        this.funcionarioService.updateFuncionario(this.formulario.value).subscribe(
+          (sucesso) => {
+            console.log(sucesso);
+            this.dialogRef.close();
+          },
+          error => {
+            this.msgError = error;
+            console.log("error updateFuncionario CadastroFuncionarioComponent: " + error);
+          });
+      } else {
+        console.log("saveFuncionario CadastroFuncionarioComponent: " + this.formulario.value);
+        this.funcionarioService.saveFuncionario(this.formulario.value).subscribe(
+          (sucesso) => {
+            console.log(sucesso);
+            this.dialogRef.close();
+          },
+          error => {
+            this.msgError = error;
+            console.log("error saveFuncionario CadastroFuncionarioComponent: " + error);
+          });
+      }
     } else {
-      console.log("saveFuncionario CadastroFuncionarioComponent: " + this.formulario.value);
-      this.funcionarioService.saveFuncionario(this.formulario.value).subscribe(
-        (sucesso) => {
-        console.log(sucesso);
-        this.dialogRef.close();
-      },
-      error => {
-        this.msgError = error;
-        console.log("error saveFuncionario CadastroFuncionarioComponent: " + error);
-      });
+      this.msgError = "O formulário não está válido!";
     }
   }
-  // resetar formulário
+
   public resetar(): void {
     this.formulario.reset();
     this.msgError = null;
   }
 
-  //valida o campo do formulário
   public verificaValidTouched(campo: any) {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
-  //aplica css de alerta para campo inválido
+
   public aplicaCssErro(campo: any) {
     return {
       'border-red': this.verificaValidTouched(campo)
