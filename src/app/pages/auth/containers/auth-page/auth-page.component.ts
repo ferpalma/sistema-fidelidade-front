@@ -19,7 +19,17 @@ export class AuthPageComponent implements OnInit{
     ngOnInit() {
     }
   sendLoginForm(){
-    (this.loginservice.authenticate(this.username, this.password).subscribe(
+    (this.loginservice.authenticateCliente(this.username, this.password).subscribe(
+      data => {
+        this.router.navigate(['']);
+        this.invalidLogin = false;
+      },
+      error => {
+        this.invalidLogin = true;
+                }));
+  }
+  sendLoginAdmForm(){
+    (this.loginservice.authenticateFuncionario(this.username, this.password).subscribe(
       data => {
         this.router.navigate(['']);
         this.invalidLogin = false;

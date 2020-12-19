@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-import { User } from '../../../../pages/auth/models';
+
 import { AuthService,  } from '../../../../pages/auth/services';
 import { routes } from '../../../../consts';
 
@@ -14,15 +14,13 @@ import { routes } from '../../../../consts';
 export class HeaderComponent {
   @Input() isMenuOpened: boolean;
   @Output() isShowSidebar = new EventEmitter<boolean>();
-  public user$: Observable<User>;
+
   public routers: typeof routes = routes;
 
   constructor(
     private userService: AuthService,
     private router: Router
   ) {
-    this.user$ = this.userService.getUser();
-
   }
 
   public openMenu(): void {

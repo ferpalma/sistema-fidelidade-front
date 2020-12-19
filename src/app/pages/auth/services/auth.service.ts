@@ -2,9 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-
-import { User } from '../models';
-
+import { Cliente } from '../../cliente/models/cliente';
+import { Funcionario } from '../../funcionario/models';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,12 +13,29 @@ export class AuthService {
     private httpClient: HttpClient
   ) {
   }
+  authenticateFuncionario(email, senha) {
+    console.log(email);
+    console.log(senha);
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa( email + ':' + senha) });
 
-  authenticate(email, telefone) {
+    return this.httpClient.get<Funcionario>('http://localhost:8080/fidelidade/login/funcionario', { headers }).pipe(
+      map(
+        userData => {
+          sessionStorage.setItem('email', email);
+          const authString = 'Basic ' + btoa(email + ':' + senha);
+          sessionStorage.setItem('basicauth', authString);
+          return userData;
+        }
+      )
+
+    );
+  }
+  authenticateCliente(email, telefone) {
     console.log(email);
     console.log(telefone);
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa( email + ':' + telefone) });
-    return this.httpClient.get<User>('http://localhost:8080/fidelidade/login', { headers }).pipe(
+
+    return this.httpClient.get<Cliente>('http://localhost:8080/fidelidade/login/cliente', { headers }).pipe(
       map(
         userData => {
           sessionStorage.setItem('email', email);
@@ -41,10 +57,5 @@ export class AuthService {
   logOut() {
     sessionStorage.removeItem('email');
   }
-  public getUser(): Observable<User> {
-    return of({
-      name: 'John',
-      lastName: 'Smith'
-    });
-  }
+
 }
