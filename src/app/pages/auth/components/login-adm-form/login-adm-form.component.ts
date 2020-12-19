@@ -13,7 +13,7 @@ export class LoginAdmFormComponent implements OnInit {
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-      cpf: new FormControl('', [Validators.required]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
       }

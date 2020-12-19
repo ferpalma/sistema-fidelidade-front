@@ -1,3 +1,4 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -7,19 +8,23 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
+
+  constructor(
+    private authService: AuthService) { }
+
   @Output() sendLoginForm = new EventEmitter<void>();
   public form: FormGroup;
 
   public ngOnInit(): void {
     this.form = new FormGroup({
-          cpf: new FormControl('', [Validators.required]),
+          username: new FormControl('', [Validators.required]),
           password: new FormControl('', [Validators.required])
         });
   }
 
   public login(): void {
     if (this.form.valid) {
-      this.sendLoginForm.emit();
+      this.authService.authenticateCliente(this.form.get('username').value, this.form.get('password').value);
     }
   }
 }

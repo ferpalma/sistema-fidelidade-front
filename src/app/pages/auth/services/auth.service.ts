@@ -9,10 +9,16 @@ import { Funcionario } from '../../funcionario/models';
 })
 export class AuthService {
 
-  constructor(
-    private httpClient: HttpClient
-  ) {
+  url = 'http://localhost:8080/fidelidade';
+
+  constructor(private httpClient: HttpClient) {
   }
+
+    // Headers
+    httpOptions = {
+      headers: new HttpHeaders()
+    };
+
   authenticateFuncionario(email, senha) {
     console.log(email);
     console.log(senha);
@@ -30,18 +36,21 @@ export class AuthService {
 
     );
   }
-  authenticateCliente(email, telefone) {
-    console.log(email);
-    console.log(telefone);
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa( email + ':' + telefone) });
+  authenticateCliente(email: string, telefone: string) {
+    console.log("authenticateCliente" + email + telefone);
 
-    return this.httpClient.get<Cliente>('http://localhost:8080/fidelidade/login/cliente', { headers }).pipe(
+    //const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa( email + ':' + telefone) });
+    
+    //return this.httpClient.get(this.url + '/login/cliente/'+email+'/'+telefone, { this.headers })
+    return this.httpClient.get(this.url + '/login/cliente/'+email+'/'+telefone, this.httpOptions)
+    .pipe(
       map(
         userData => {
-          sessionStorage.setItem('email', email);
+          /*sessionStorage.setItem('email', email);
           const authString = 'Basic ' + btoa(email + ':' + telefone);
           sessionStorage.setItem('basicauth', authString);
-          return userData;
+          return userData;*/
+          console.log("userData" + userData);
         }
       )
 
