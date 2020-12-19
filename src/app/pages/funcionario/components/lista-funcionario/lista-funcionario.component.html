@@ -2,6 +2,9 @@
     <mat-card-title class="d-flex justify-content-between">
         <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
         <p>Funcionarios</p>
+        <label for="idFuncionario">Pesquisa</label>
+        <input type="text" id="name" class="form-control" formControlName="name">
+
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
             add
             </span>Adicionar funcionario</button>

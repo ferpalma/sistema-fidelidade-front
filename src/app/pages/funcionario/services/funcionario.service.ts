@@ -26,14 +26,20 @@ export class FuncionarioService {
         retry(2),
         catchError(this.handleError))
   }
-
+  getFuncionarioByNome(Nome: string): Observable<Funcionario> {
+    return this.httpClient.get<Funcionario>(this.url + '/' + 'funcionario' + '/' + Nome)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
+  }
   // Obtem um funcionario pelo id
   getFuncionarioById(id: number): Observable<Funcionario> {
     return this.httpClient.get<Funcionario>(this.url + '/' + 'funcionario' + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // salva um funcionario
@@ -42,7 +48,7 @@ export class FuncionarioService {
       .pipe(
         retry(2),
         catchError(this.handleError)
-      )
+      );
   }
 
   // atualiza um funcionario
@@ -51,7 +57,7 @@ export class FuncionarioService {
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // deleta um funcionario
@@ -61,7 +67,7 @@ export class FuncionarioService {
       .pipe(
         retry(1),
         catchError(this.handleError)
-      )
+      );
   }
 
   // Manipulação de erros
