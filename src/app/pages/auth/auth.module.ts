@@ -4,14 +4,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { BasicAuthHtppInterceptorService } from './services/basic-auth-htpp-interceptor.service';
 import { AuthPageComponent } from './containers';
 import { AuthRoutingModule } from './auth-routing.module';
 import { YearPipe } from './pipes';
-import { AuthService, EmailService } from './services';
+import { AuthService} from './services';
 import { LoginFormComponent, } from './components';
-import { AuthGuard } from './guards';
 import { LoginAdmFormComponent } from './components/login-adm-form/login-adm-form.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,12 +28,14 @@ import { LoginAdmFormComponent } from './components/login-adm-form/login-adm-for
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [
     AuthService,
-    EmailService,
-    AuthGuard
+    {
+      provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true
+    }
   ]
 })
 export class AuthModule { }
