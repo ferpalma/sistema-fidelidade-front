@@ -10,32 +10,8 @@ import { AuthService } from '../../services';
 })
 export class AuthPageComponent implements OnInit{
 
-  username = '';
-  password = '';
-  invalidLogin = false;
-
-  constructor(private router: Router,
-              private loginservice: AuthService) { }
+  constructor() { }
     ngOnInit() {
     }
-  sendLoginForm(){
-    (this.loginservice.authenticateCliente(this.username, this.password).subscribe(
-      data => {
-        this.router.navigate(['']);
-        this.invalidLogin = false;
-      },
-      error => {
-        this.invalidLogin = true;
-                }));
-  }
-  sendLoginAdmForm(){
-    (this.loginservice.authenticateFuncionario(this.username, this.password).subscribe(
-      data => {
-        this.router.navigate(['']);
-        this.invalidLogin = false;
-      },
-      error => {
-        this.invalidLogin = true;
-                }));
-  }
+
 }

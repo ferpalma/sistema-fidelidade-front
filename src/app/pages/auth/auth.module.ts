@@ -4,7 +4,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { BasicAuthHtppInterceptorService } from './services/basic-auth-htpp-interceptor.service';
+
 import { AuthPageComponent } from './containers';
 import { AuthRoutingModule } from './auth-routing.module';
 import { YearPipe } from './pipes';
@@ -32,10 +32,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     FormsModule
   ],
   providers: [
-    AuthService,
-    {
-      provide: HTTP_INTERCEPTORS, useClass: BasicAuthHtppInterceptorService, multi: true
-    }
+    AuthService
   ]
 })
 export class AuthModule { }
