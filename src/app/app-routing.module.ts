@@ -15,13 +15,11 @@ const routes: Routes = [
   {
     path: 'homecliente',
     pathMatch: 'full',
-    canActivate: [AuthGuard],
     component: HomeClientePageComponent
   },
   {
     path: 'homefuncionario',
     pathMatch: 'full',
-    canActivate: [AuthGuard],
     component: HomeFuncionarioPageComponent
   },
   {
