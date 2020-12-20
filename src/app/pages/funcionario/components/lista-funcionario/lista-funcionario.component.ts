@@ -1,11 +1,11 @@
+import { Funcionario } from './../../models/funcionario';
+import { FuncionarioService } from './../../services/funcionario.service';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { catchError } from 'rxjs/operators';
 import { empty, Observable, of } from 'rxjs';
 
-import { FuncionarioService } from '../../services/funcionario.service';
-import { Funcionario } from '../../models/funcionario';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { CadastroFuncionarioComponent } from '../cadastro-funcionario/cadastro-funcionario.component'
 // import { EditarFuncionarioComponent } from '../editar-funcionario/editar-funcionario.component'
@@ -19,14 +19,39 @@ export class ListaFuncionarioComponent implements OnInit {
 
   public listaFuncionarios$: Observable<Funcionario[]>;
   public msgError: string;
-
+  public form: FormGroup;
+  
+  constructor(public dialog: MatDialog, private funcionarioService: FuncionarioService) {}
+  
   ngOnInit(): void {
     this.msgError = null;
     this.getListaFuncionario();
+    // this.pesquisa();
+    this.form = new FormGroup({
+      nome: new FormControl(null)
+    });
+    
   }
 
-  constructor(public dialog: MatDialog, private funcionarioService: FuncionarioService) {}
+  private formulario(): void {
+    this.form = new FormGroup({
+      idUsuario: new FormControl(null),
+      nome: new FormControl(null, Validators.required),
+    });
+  }
 
+  public pesquisa(funcionario: Funcionario): void {
+    this.funcionarioService.getFuncionarioByNome(funcionario.nome).subscribe(
+      (sucesso) => {
+        console.log(sucesso);
+        this.getListaFuncionario();
+      },
+      error => {
+        this.msgError = error;
+        console.log("error deleteFuncionario ListaFuncionarioComponent : " + error);
+      });
+  }
+  
 
   public openDialog() {
     this.dialog.open(CadastroFuncionarioComponent, {

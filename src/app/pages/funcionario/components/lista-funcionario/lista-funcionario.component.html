@@ -2,11 +2,18 @@
     <mat-card-title class="d-flex justify-content-between">
         <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
         <p>Funcionarios</p>
-        <label for="idFuncionario">Pesquisa</label>
-        <input type="text" id="name" class="form-control" formControlName="name">
+        <form class="form" [formGroup]="formulario" (ngSubmit)="pesquisa()">
+            <mat-card-title>
+                <label for="Pesquisa">Pesquisa</label>
+                <input type="text" id="Pesquisa" class="form-control" formControlName="Pesquisa">
+            </mat-card-title>
 
+            <div class="form-actions">
+                <button class="form-actions__login" mat-raised-button color="primary" type="submit">Buscar</button>
+            </div>
+        </form>
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
-            add
+                add
             </span>Adicionar funcionario</button>
     </mat-card-title>
     <mat-card class="fundo-lightcoral" *ngIf="msgError"><span>{{ msgError }}</span></mat-card>
@@ -34,11 +41,12 @@
                 <td class="text-right">
                     <button mat-raised-button color="accent" class="mr-3" (click)="editFuncionario(funcionario)">
                         <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
-                        edit
+                            edit
                         </span>Editar</button>
-                    <button mat-raised-button style="background-color: #e63946; color: white;" (click)="deleteFuncionario(funcionario)">
+                    <button mat-raised-button style="background-color: #e63946; color: white;"
+                        (click)="deleteFuncionario(funcionario)">
                         <span class="material-icons mr-2 pb-1" style="font-size: 16px;">
-                        delete
+                            delete
                         </span>Apagar</button>
                 </td>
 
