@@ -2,16 +2,16 @@
     <mat-card-title class="d-flex justify-content-between">
         <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
         <p>Funcionarios</p>
-        <form class="form" [formGroup]="formulario" (ngSubmit)="pesquisa()">
-            <mat-card-title>
-                <label for="Pesquisa">Pesquisa</label>
-                <input type="text" id="Pesquisa" class="form-control" formControlName="Pesquisa">
+        <form class="form" [formGroup]="form" (ngSubmit)="pesquisa()">
+
+            <mat-card-title class="form_pesquisa">
+                  <input matInput placeholder="Pesquisa" type="text" id="pesquisa"  formControlName="pesquisa">
             </mat-card-title>
 
             <div class="form-actions">
-                <button class="form-actions__login" mat-raised-button color="primary" type="submit">Buscar</button>
+                <button class="form-actions__pesquisa" mat-raised-button color="primary" type="submit">Buscar</button>
             </div>
-        </form>
+          </form>
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
                 add
             </span>Adicionar funcionario</button>

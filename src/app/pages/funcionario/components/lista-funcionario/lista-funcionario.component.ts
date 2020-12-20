@@ -20,28 +20,21 @@ export class ListaFuncionarioComponent implements OnInit {
   public listaFuncionarios$: Observable<Funcionario[]>;
   public msgError: string;
   public form: FormGroup;
-  
+
   constructor(public dialog: MatDialog, private funcionarioService: FuncionarioService) {}
-  
+
   ngOnInit(): void {
     this.msgError = null;
     this.getListaFuncionario();
-    // this.pesquisa();
+
     this.form = new FormGroup({
-      nome: new FormControl(null)
+      pesquisa: new FormControl(null, Validators.required)
     });
-    
+
   }
 
-  private formulario(): void {
-    this.form = new FormGroup({
-      idUsuario: new FormControl(null),
-      nome: new FormControl(null, Validators.required),
-    });
-  }
-
-  public pesquisa(funcionario: Funcionario): void {
-    this.funcionarioService.getFuncionarioByNome(funcionario.nome).subscribe(
+  public pesquisa(): void {
+    this.funcionarioService.getFuncionarioByNome(this.form.get('pesquisa').value).subscribe(
       (sucesso) => {
         console.log(sucesso);
         this.getListaFuncionario();
@@ -51,7 +44,7 @@ export class ListaFuncionarioComponent implements OnInit {
         console.log("error deleteFuncionario ListaFuncionarioComponent : " + error);
       });
   }
-  
+
 
   public openDialog() {
     this.dialog.open(CadastroFuncionarioComponent, {

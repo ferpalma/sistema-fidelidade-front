@@ -27,7 +27,8 @@ export class FuncionarioService {
         catchError(this.handleError))
   }
   getFuncionarioByNome(Nome: string): Observable<Funcionario> {
-    return this.httpClient.get<Funcionario>(this.url + '/' + 'funcionario' + '/' + Nome)
+    console.log(this.url + '/' + 'funcionario' + '/' + 'nome' + '/' + Nome);
+    return this.httpClient.get<Funcionario>(this.url + '/' + 'funcionario' + '/' + 'nome' + '/' + Nome)
       .pipe(
         retry(2),
         catchError(this.handleError)
