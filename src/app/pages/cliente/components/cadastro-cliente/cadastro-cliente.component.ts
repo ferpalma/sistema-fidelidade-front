@@ -12,10 +12,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CadastroClienteComponent implements OnInit {
 
-
   public formulario: FormGroup;
   public msgError: string;
-
 
   constructor(
     private clienteService: ClienteService,

@@ -1,1 +1,44 @@
-<p>cadastro-promocao works!</p>
+<h3 mat-dialog-title class="mb-4">Cadastro de promoção</h3>
+<div mat-dialog-content>
+
+    <form id="add-form-Produto" (ngSubmit)="savePromocao()" [formGroup]="formulario" novalidate>
+
+        <mat-card class="fundo-lightcoral" *ngIf="msgError"><span>{{ msgError }}</span></mat-card>
+
+        <div class="form-group" hidden>
+            <label for="idProduto">idPromocao</label>
+            <input type="text" id="idProduto" formControlName="idProduto" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" id="nome" formControlName="nome" class="form-control" placeholder="Digite o nome" [ngClass]="aplicaCssErro('nome')">
+            <div *ngIf="verificaValidTouched('nome')">
+                <span class="font-red">Nome é obrigatório</span>
+            </div>
+        </div>
+
+        <div class="form-group form-check">
+            <input type="checkbox" id="status" formControlName="status" class="form-check-input" checked>
+            <label class="form-check-label" for="status">Ativo</label>
+        </div>
+
+        <div class="form-group">
+            <label for="urlImage">Imagem</label>
+            <input type="file" id="urlImage" accept="image/x-png,image/jpeg" (change)="onFileSelected($event)" formControlName="urlImage" class="form-control">
+            <div *ngIf="verificaValidTouched('urlImage')">
+                <span class="font-red">A imagem é obrigatório</span>
+            </div>
+        </div>
+
+        <img [src]="imageSrc" *ngIf="imageSrc" style="height: 30%; width: 30%">
+
+        <div class="d-flex justify-content-between">
+            <button type="reset" mat-raised-button color="accent" class="mr-3" (click)="resetar()">
+                Limpar</button>
+            <button type="submit" mat-raised-button style="background-color: #06d6a0; color: white;">
+                Salvar</button>
+        </div>
+
+    </form>
+</div>

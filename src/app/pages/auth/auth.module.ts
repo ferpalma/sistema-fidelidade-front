@@ -8,10 +8,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AuthPageComponent } from './containers';
 import { AuthRoutingModule } from './auth-routing.module';
 import { YearPipe } from './pipes';
-import { AuthService, EmailService } from './services';
+import { AuthService} from './services';
 import { LoginFormComponent, } from './components';
-import { AuthGuard } from './guards';
 import { LoginAdmFormComponent } from './components/login-adm-form/login-adm-form.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,12 +28,11 @@ import { LoginAdmFormComponent } from './components/login-adm-form/login-adm-for
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
+    HttpClientModule,
     FormsModule
   ],
   providers: [
-    AuthService,
-    EmailService,
-    AuthGuard
+    AuthService
   ]
 })
 export class AuthModule { }

@@ -25,7 +25,7 @@
         <tbody>
             <!-- TODO: quem sabe adicionar um paginator -->
             <tr *ngFor="let funcionario of listaFuncionarios$ | async">
-                <td>{{funcionario.idFuncionario}}</td>
+                <td>{{funcionario.idUsuario}}</td>
                 <td *ngIf="funcionario.nome">{{funcionario.nome}}</td>
                 <td>{{funcionario.status ? 'Ativo':'Inativo'}}</td>
                 <td>{{funcionario.cpf}}</td>

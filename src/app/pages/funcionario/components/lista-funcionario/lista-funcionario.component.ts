@@ -49,6 +49,7 @@ export class ListaFuncionarioComponent implements OnInit {
       );
   }
 
+
   // deleta uma categoria
   public deleteFuncionario(funcionario: Funcionario) {
     this.funcionarioService.deleteFuncionario(funcionario).subscribe(

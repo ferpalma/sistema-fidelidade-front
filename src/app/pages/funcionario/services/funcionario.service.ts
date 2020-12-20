@@ -17,7 +17,7 @@ export class FuncionarioService {
   // Headers
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  }
+  };
 
   // Obtem todos os funcionarios
   getListaFuncionario(): Observable<Funcionario[]> {
@@ -62,8 +62,8 @@ export class FuncionarioService {
 
   // deleta um funcionario
   deleteFuncionario(funcionario: Funcionario) {
-    console.log(this.url + '/' + 'funcionario' + '/' + funcionario.idFuncionario);
-    return this.httpClient.delete<Funcionario>(this.url + '/' + 'funcionario' + '/' + funcionario.idFuncionario, this.httpOptions)
+    console.log(this.url + '/' + 'funcionario' + '/' + funcionario.idUsuario);
+    return this.httpClient.delete<Funcionario>(this.url + '/' + 'funcionario' + '/' + funcionario.idUsuario, this.httpOptions)
       .pipe(
         retry(1),
         catchError(this.handleError)
@@ -82,5 +82,5 @@ export class FuncionarioService {
     }
     console.log("HandleError errorMessage: " + errorMessage);
     return throwError(errorMessage);
-  };
+  }
 }
