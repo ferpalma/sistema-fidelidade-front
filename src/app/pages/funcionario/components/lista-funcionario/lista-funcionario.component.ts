@@ -7,7 +7,7 @@ import { empty, Observable, of } from 'rxjs';
 
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { CadastroFuncionarioComponent } from '../cadastro-funcionario/cadastro-funcionario.component'
+import { CadastroFuncionarioComponent } from '../cadastro-funcionario/cadastro-funcionario.component';
 // import { EditarFuncionarioComponent } from '../editar-funcionario/editar-funcionario.component'
 
 @Component({
@@ -38,6 +38,7 @@ export class ListaFuncionarioComponent implements OnInit {
       (sucesso) => {
         console.log(sucesso);
         this.getListaFuncionario();
+
       },
       error => {
         this.msgError = error;

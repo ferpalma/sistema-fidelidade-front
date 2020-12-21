@@ -16,17 +16,13 @@ export class AuthService {
       headers: new HttpHeaders()
     };
 
-  authenticateFuncionario(email, senha) {
-    console.log(email);
-    console.log(senha);
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa( email + ':' + senha) });
-
-    return this.httpClient.get('http://localhost:8080/fidelidade/login/funcionario', { headers }).pipe(
+  authenticateFuncionario(email: string, senha: string) {
+    console.log("authenticateFuncionario" + email + ' ' + senha);
+    return this.httpClient.get(this.url + '/login/funcionario/' + email + '/' + senha, this.httpOptions)
+    .pipe(
       map(
         userData => {
           sessionStorage.setItem('email', email);
-          const authString = 'Basic ' + btoa(email + ':' + senha);
-          sessionStorage.setItem('basicauth', authString);
           return userData;
         }
       )
@@ -34,7 +30,7 @@ export class AuthService {
     );
   }
   authenticateCliente(email: string, telefone: string) {
-    console.log("authenticateCliente" + email + telefone);
+    console.log("authenticateCliente" + email + ' ' + telefone);
     return this.httpClient.get(this.url + '/login/cliente/' + email + '/' + telefone, this.httpOptions)
     .pipe(
       map(

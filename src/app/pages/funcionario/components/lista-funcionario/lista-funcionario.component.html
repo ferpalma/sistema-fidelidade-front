@@ -2,7 +2,7 @@
     <mat-card-title class="d-flex justify-content-between">
         <!-- TODO: trocar por um input de search, busca categoria por nome: https://mdbootstrap.com/docs/angular/tables/search/#docsTabsOverview -->
         <p>Funcionarios</p>
-        <form class="form" [formGroup]="form" (ngSubmit)="pesquisa()">
+         <!--<form class="form" [formGroup]="form" (ngSubmit)="pesquisa()">
 
             <mat-card-title class="form_pesquisa">
                   <input matInput placeholder="Pesquisa" type="text" id="pesquisa"  formControlName="pesquisa">
@@ -11,7 +11,7 @@
             <div class="form-actions">
                 <button class="form-actions__pesquisa" mat-raised-button color="primary" type="submit">Buscar</button>
             </div>
-          </form>
+          </form>-->
         <button mat-raised-button color="primary" (click)="openDialog()"><span class="material-icons mr-2 pb-1">
                 add
             </span>Adicionar funcionario</button>
@@ -25,8 +25,7 @@
                 <th scope="col">Status</th>
                 <th scope="col">CPF</th>
                 <th scope="col">Email</th>
-                <th scope="col">Senha</th>
-                <th scope="col"></th>
+                                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -37,8 +36,7 @@
                 <td>{{funcionario.status ? 'Ativo':'Inativo'}}</td>
                 <td>{{funcionario.cpf}}</td>
                 <td>{{funcionario.email}}</td>
-                <td>{{funcionario.senha}}</td>
-                <td class="text-right">
+                    <td class="text-right">
                     <button mat-raised-button color="accent" class="mr-3" (click)="editFuncionario(funcionario)">
                         <span class="material-icons mr-2 pb-1" style="font-size: 15px;">
                             edit
