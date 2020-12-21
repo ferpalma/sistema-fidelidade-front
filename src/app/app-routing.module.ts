@@ -60,6 +60,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/resgate/resgate.module').then(m => m.ResgateModule)
   },
   {
+    path: 'sobre',
+    pathMatch: 'full',
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/sobre/sobre.module').then(m => m.SobreModule)
+  },
+  {
     path: 'tables',
     pathMatch: 'full',
     loadChildren: () => import('./pages/tables/tables.module').then(m => m.TablesModule)

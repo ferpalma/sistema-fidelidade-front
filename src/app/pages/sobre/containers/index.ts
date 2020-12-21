@@ -1,0 +1,1 @@
+export * from './sobre-page/sobre-page.component';
