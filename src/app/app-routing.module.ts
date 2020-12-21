@@ -53,12 +53,12 @@ const routes: Routes = [
     pathMatch: 'full',
     loadChildren: () => import('./pages/promocao/promocao.module').then(m => m.PromocaoModule)
   },
-  // {
-  //   path: 'resgate',
-  //   pathMatch: 'full',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: () => import('./pages/resgate/resgate.module').then(m => m.ResgateModule)
-  // },
+  {
+    path: 'resgate',
+    pathMatch: 'full',
+    // canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/resgate/resgate.module').then(m => m.ResgateModule)
+  },
   {
     path: 'tables',
     pathMatch: 'full',
